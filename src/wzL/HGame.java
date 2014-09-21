@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package test;
+package wzL;
 
 import java.io.UnsupportedEncodingException;
 import java.util.logging.Level;

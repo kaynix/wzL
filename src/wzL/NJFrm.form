@@ -3,7 +3,7 @@
 <Form version="1.7" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="WarzoneOnline pre-alpha 0.14"/>
+    <Property name="title" type="java.lang.String" value="Warzone Online Launcher alpha 0.14a"/>
     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
       <Color id="Default Cursor"/>
     </Property>
@@ -606,7 +606,7 @@
                       <Font name="DejaVu Sans Mono" size="12" style="0"/>
                     </Property>
                     <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="new javax.swing.AbstractListModel() { test.WzFiles ff = new test.WzFiles();&#xa;    String[] strings = ff.removeHashFileEnds(ff.maplist());&#xa;    public int getSize() { return strings.length; }&#xa;    public Object getElementAt(int i) { return strings[i]; }&#xa;}" type="code"/>
+                      <Connection code="new javax.swing.AbstractListModel() { wzL.WzFiles ff = new wzL.WzFiles();&#xa;    String[] strings = ff.removeHashFileEnds(ff.maplist());&#xa;    public int getSize() { return strings.length; }&#xa;    public Object getElementAt(int i) { return strings[i]; }&#xa;}" type="code"/>
                     </Property>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Default Cursor"/>
@@ -636,7 +636,7 @@
                     <Property name="selectionMode" type="int" value="0"/>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="DefaultListModel ls = new DefaultListModel();&#xa;jList3.setModel(ls);&#xa;test.WzFiles ff = new test.WzFiles();&#xa;    String[] strings = ff.modlist(true);&#xa;for(int i=0;i&lt;strings.length;i++)&#xa;    ls.addElement(strings[i]);"/>
+                    <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="DefaultListModel ls = new DefaultListModel();&#xa;jList3.setModel(ls);&#xa;wzL.WzFiles ff = new wzL.WzFiles();&#xa;    String[] strings = ff.modlist(true);&#xa;for(int i=0;i&lt;strings.length;i++)&#xa;    ls.addElement(strings[i]);"/>
                   </AuxValues>
                 </Component>
               </SubComponents>
@@ -644,7 +644,7 @@
             <Component class="javax.swing.JButton" name="jButton5">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/test/up.png"/>
+                  <Image iconType="3" name="/wzL/up.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -654,7 +654,7 @@
             <Component class="javax.swing.JButton" name="jButton6">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/test/down.png"/>
+                  <Image iconType="3" name="/wzL/down.png"/>
                 </Property>
               </Properties>
               <Events>
@@ -692,7 +692,7 @@
                     <Property name="selectionMode" type="int" value="0"/>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="DefaultListModel ls2 = new DefaultListModel();&#xa;jList4.setModel(ls2);&#xa;test.WzFiles ff2 = new test.WzFiles();&#xa;    String[] strings2 = ff.modlist(false);&#xa;for(int i=0;i&lt;strings2.length;i++)&#xa;    ls2.addElement(strings2[i]);"/>
+                    <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="DefaultListModel ls2 = new DefaultListModel();&#xa;jList4.setModel(ls2);&#xa;wzL.WzFiles ff2 = new wzL.WzFiles();&#xa;    String[] strings2 = ff.modlist(false);&#xa;for(int i=0;i&lt;strings2.length;i++)&#xa;    ls2.addElement(strings2[i]);"/>
                   </AuxValues>
                 </Component>
               </SubComponents>
@@ -790,7 +790,7 @@
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/test/wz_faceboook_logo.png"/>
+                  <Image iconType="3" name="/wzL/wz_faceboook_logo.png"/>
                 </Property>
               </Properties>
             </Component>
@@ -799,7 +799,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Droid Sans" size="12" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;This launcher made by Kaynix for warzone2100 players to make online play more comfortable.&lt;br&gt;&#xa;If you have any suggestions/improvments or found bug contact me kaynix29@gmail.com or at forum pm to &lt;b&gt;Terminator&lt;/b&gt;&lt;br&gt;&#xa;Warzone2100 Online version alpha 0.14:&lt;br&gt;&#xa;- chat improvments&lt;br&gt;&#xa;- add mods managment&lt;br&gt;&#xa;- add support for windows and linux OS (no MAC OS)&lt;br&gt;&#xa;- few bug fixes&lt;br&gt;&#xa;&lt;br&gt;&#xa;&lt;p&gt;run launcher in terminal to see logs.&lt;/p&gt;&#xa;&lt;/html&gt;" noResource="true"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt; This launcher made by Kaynix for warzone2100 players to make online play more comfortable.&lt;br&gt; &#xa;If you have any suggestions/improvments or found bug contact me kaynix29@gmail.com or at forum pm to &lt;b&gt;Terminator&lt;/b&gt;&lt;br&gt; &#xa;Warzone2100 Online version alpha 0.14a:&lt;br&gt; &#xa;- chat improvments&lt;br&gt; - add mods managment&lt;br&gt; &#xa;- add support for windows and linux OS (no MAC OS)&lt;br&gt; &#xa;- few bug fixes&lt;br&gt;&#xa;- fixed --join 2 launches of warzone&lt;br&gt;&#xa;- fixed web IRC users wasn&apos;t parsing in main chat&lt;br&gt;&#xa;&#xa; &lt;br&gt; &lt;p&gt;run launcher in terminal to see logs.&lt;/p&gt; &#xa;&lt;/html&gt;" noResource="true"/>
                 <Property name="verticalAlignment" type="int" value="1"/>
               </Properties>
             </Component>

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package test;
+package wzL;
 
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -238,7 +238,7 @@ public class NJFrm extends javax.swing.JFrame {
         jList3 = new javax.swing.JList();
         DefaultListModel ls = new DefaultListModel();
         jList3.setModel(ls);
-        test.WzFiles ff = new test.WzFiles();
+        wzL.WzFiles ff = new wzL.WzFiles();
         String[] strings = ff.modlist(true);
         for(int i=0;i<strings.length;i++)
         ls.addElement(strings[i]);
@@ -251,7 +251,7 @@ public class NJFrm extends javax.swing.JFrame {
         jList4 = new javax.swing.JList();
         DefaultListModel ls2 = new DefaultListModel();
         jList4.setModel(ls2);
-        test.WzFiles ff2 = new test.WzFiles();
+        wzL.WzFiles ff2 = new wzL.WzFiles();
         String[] strings2 = ff.modlist(false);
         for(int i=0;i<strings2.length;i++)
         ls2.addElement(strings2[i]);
@@ -264,7 +264,7 @@ public class NJFrm extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("WarzoneOnline pre-alpha 0.14");
+        setTitle("Warzone Online Launcher alpha 0.14a");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFont(new java.awt.Font("DejaVu Sans", 0, 12)); // NOI18N
         setMinimumSize(new java.awt.Dimension(640, 580));
@@ -545,7 +545,7 @@ public class NJFrm extends javax.swing.JFrame {
         jTabbedPane1.addTab("Options", jPanel2);
 
         jList2.setFont(new java.awt.Font("DejaVu Sans Mono", 0, 12)); // NOI18N
-        jList2.setModel(new javax.swing.AbstractListModel() { test.WzFiles ff = new test.WzFiles();
+        jList2.setModel(new javax.swing.AbstractListModel() { wzL.WzFiles ff = new wzL.WzFiles();
             String[] strings = ff.removeHashFileEnds(ff.maplist());
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
@@ -560,14 +560,14 @@ public class NJFrm extends javax.swing.JFrame {
         jList3.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane5.setViewportView(jList3);
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/test/up.png"))); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wzL/up.png"))); // NOI18N
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/test/down.png"))); // NOI18N
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wzL/down.png"))); // NOI18N
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -673,10 +673,10 @@ public class NJFrm extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Ladder/Scoreboard/Tournaments", jPanel4);
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/test/wz_faceboook_logo.png"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wzL/wz_faceboook_logo.png"))); // NOI18N
 
         jLabel12.setFont(new java.awt.Font("Droid Sans", 0, 12)); // NOI18N
-        jLabel12.setText("<html>\nThis launcher made by Kaynix for warzone2100 players to make online play more comfortable.<br>\nIf you have any suggestions/improvments or found bug contact me kaynix29@gmail.com or at forum pm to <b>Terminator</b><br>\nWarzone2100 Online version alpha 0.14:<br>\n- chat improvments<br>\n- add mods managment<br>\n- add support for windows and linux OS (no MAC OS)<br>\n- few bug fixes<br>\n<br>\n<p>run launcher in terminal to see logs.</p>\n</html>"); // NOI18N
+        jLabel12.setText("<html> This launcher made by Kaynix for warzone2100 players to make online play more comfortable.<br> \nIf you have any suggestions/improvments or found bug contact me kaynix29@gmail.com or at forum pm to <b>Terminator</b><br> \nWarzone2100 Online version alpha 0.14a:<br> \n- chat improvments<br> - add mods managment<br> \n- add support for windows and linux OS (no MAC OS)<br> \n- few bug fixes<br>\n- fixed --join 2 launches of warzone<br>\n- fixed web IRC users wasn't parsing in main chat<br>\n\n <br> <p>run launcher in terminal to see logs.</p> \n</html>"); // NOI18N
         jLabel12.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
