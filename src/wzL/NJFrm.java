@@ -676,7 +676,7 @@ public class NJFrm extends javax.swing.JFrame {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wzL/wz_faceboook_logo.png"))); // NOI18N
 
         jLabel12.setFont(new java.awt.Font("Droid Sans", 0, 12)); // NOI18N
-        jLabel12.setText("<html> This launcher made by Kaynix for warzone2100 players to make online play more comfortable.<br> \nIf you have any suggestions/improvments or found bug contact me kaynix29@gmail.com or at forum pm to <b>Terminator</b><br> \nWarzone2100 Online version alpha 0.14a:<br> \n- chat improvments<br> - add mods managment<br> \n- add support for windows and linux OS (no MAC OS)<br> \n- few bug fixes<br>\n- fixed --join 2 launches of warzone<br>\n- fixed web IRC users wasn't parsing in main chat<br>\n\n <br> <p>run launcher in terminal to see logs.</p> \n</html>"); // NOI18N
+        jLabel12.setText("<html> This launcher made by Kaynix for warzone2100 players to make online play more comfortable.<br> \nIf you have any suggestions/improvments or found bug contact me kaynix29@gmail.com or at forum pm to <b>Terminator</b><br> \nWarzone2100 Online version alpha 0.14a:<br> \n- chat improvments<br> - add mods managment<br> \n- add support for windows and linux OS (no MAC OS)<br> \n- few bug fixes<br>\n- fixed --join 2 launches of warzone(for --host too)<br>\n- fixed web IRC users wasn't parsing in main chat<br>\n\n <br> <p>run launcher in terminal to see logs.</p> \n</html>"); // NOI18N
         jLabel12.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
