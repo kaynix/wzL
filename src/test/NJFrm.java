@@ -808,8 +808,9 @@ public class NJFrm extends javax.swing.JFrame {
             System.out.print("warzone2100.exe --join=" + jTable1.getValueAt(jTable1.getSelectedRow(), 4));
             if (System.getProperty("os.name").contains("Windows")) {
                 p = Runtime.getRuntime().exec("warzone2100.exe --join=" + jTable1.getValueAt(jTable1.getSelectedRow(), 4));
-            }
+            } else {
             p = Runtime.getRuntime().exec("./warzone2100 --join=" + jTable1.getValueAt(jTable1.getSelectedRow(), 4));
+            }
           //  Process p2 = Runtime.getRuntime().exec("warzone2100 --join=" + jTable1.getValueAt(jTable1.getSelectedRow(), 4));
         } catch (IOException ex) {
             Logger.getLogger(NJFrm.class.getName()).log(Level.SEVERE, null, ex);
@@ -824,8 +825,9 @@ public class NJFrm extends javax.swing.JFrame {
             // TODO add your handling code here:
             if (System.getProperty("os.name").contains("Windows")) {
                 p = Runtime.getRuntime().exec("warzone2100.exe --host");
-            }
+            } else {
             p = Runtime.getRuntime().exec("./warzone2100 --host");
+            }
 
         } catch (IOException ex) {
             Logger.getLogger(NJFrm.class.getName()).log(Level.SEVERE, null, ex);
