@@ -12,15 +12,37 @@ import java.io.FilenameFilter;
  * @author kaynix
  */
 public class WzFiles {
-    public String[] maplist(){
-        String foldpath;
-        if (System.getProperty("os.name").contains("Windows")){
-       foldpath = ((System.getProperty("user.home"))+("/Documents/Warzone 2100 3.1/maps/"));}
-        else {
-            foldpath = ((System.getProperty("user.home"))+("/.warzone2100-3.1/maps/")); //linux folderpath
+    String wzapath;
+    String wzdatadir;
+    String wzconfigpath;
+    String userHome;
+    String pathMods;
+    String pathMaps;
+    String pathAutoLoad;
+
+    public WzFiles() {
+        userHome = System.getProperty("user.home");
+        wzdatadir = System.getProperty("user.dir");
+        if (System.getProperty("os.name").contains("Windows")) { //windows folders
+
+            wzconfigpath = userHome + ("/Documents/Warzone 2100 3.1/");
+            pathMaps = userHome + ("/Documents/Warzone 2100 3.1/maps/");
+            pathMods = userHome + ("/Documents/Warzone 2100 3.1/mods/");
+            pathAutoLoad = userHome + ("/Documents/Warzone 2100 3.1/mods/autoload/");
+            wzapath = (System.getProperty("user.dir")) + "warzone2100.exe";
+        } else { //linux folders
+            wzconfigpath = userHome + ("/.warzone2100-3.1/");
+            pathMaps = userHome + ("/.warzone2100-3.1/maps/");
+            pathMods = userHome + ("/.warzone2100-3.1/mods/");
+            pathAutoLoad = userHome + ("/.warzone2100-3.1/mods/autoload/");
+            wzapath = (System.getProperty("user.dir")) + "/warzone2100";
+            System.out.println(wzapath);
+
         }
-      // foldpath =System.getProperty("user.home")+("/Documents/.warzone2100-3.1/maps/");
-       System.out.println(System.getProperty("os.name"));
+    }
+    
+    public String[] maplist(){
+        String foldpath = pathMaps;
     //   System.out.println("User Home Path: " + System.getenv("UserProfile"));
         File file = new File(foldpath);   //%USERPROFILE%
         FilenameFilter onlyWz = new OnlyExt("wz");
@@ -41,17 +63,12 @@ public class WzFiles {
      return list;       
     }
     public String[] modlist(boolean autoload){
-       String foldpath;
-        if (System.getProperty("os.name").contains("Windows")) {
-            foldpath = ((System.getProperty("user.home")) + ("/Documents/Warzone 2100 3.1/mods/"));
-        } else {
-            foldpath = ((System.getProperty("user.home")) + ("/.warzone2100-3.1/mods/")); //linux folderpath
-        }
-        makeRemoveAndAutoloadDir(foldpath);
+       String foldpath =pathMods;
+        mkRmALinModsfold(foldpath);
      //  System.out.println("User Home Path: " + System.getenv("UserProfile"));
       //  File file = new File(foldpath);   //%USERPROFILE%
         FilenameFilter onlyWz = new OnlyExt("wz");
-        if(autoload) foldpath+="autoload/";
+        if(autoload) foldpath=pathAutoLoad;
         File[] filesInMods = new File(foldpath).listFiles(onlyWz);
            
         File[] filesInAutoload = new File(foldpath).listFiles(onlyWz);
@@ -65,10 +82,10 @@ public class WzFiles {
         return list;
     }
     
-    void makeRemoveAndAutoloadDir(String path){
-        File theMods = new File(path);
-        File theDir = new File(path+ ".removed");
-        File theAutoloadDir = new File(path+ "autoload");
+    void mkRmALinModsfold(String pathMods){
+        File theMods = new File(pathMods);
+        File theDir = new File(pathMods+ ".removed");
+        File theAutoloadDir = new File(pathMods+ "autoload");
 
   // if the directory does not exist, create it
         if(!theMods.exists()){
@@ -82,7 +99,7 @@ public class WzFiles {
         }
         
   if (!theDir.exists()) {
-    System.out.println("Making tmp directory: " + path + ".removed");
+    System.out.println("Making tmp directory: " + pathMods + ".removed");
     boolean result = false;
 
     try{
@@ -102,11 +119,6 @@ public class WzFiles {
   }
     }
     
-    public void findGameExe(){
-        
-        String foldpath = ((System.getProperty("user.home"))+("/Documents/Warzone 2100 3.1/mods/"));
-        
-    }
 }
 
 class OnlyExt implements FilenameFilter {

@@ -20,6 +20,7 @@
   </SyntheticProperties>
   <Events>
     <EventHandler event="windowClosed" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosed"/>
+    <EventHandler event="windowClosing" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosing"/>
   </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -410,6 +411,9 @@
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JTextField" name="jTextField3">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="WzFiles obj = new WzFiles();&#xa;jTextField3.setText(obj.wzapath);"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
@@ -432,7 +436,7 @@
             <Component class="javax.swing.JTextField" name="jTextField4">
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTextField()"/>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="String foldpath = ((System.getProperty(&quot;user.home&quot;))+(&quot;/Documents/Warzone 2100 3.1/config&quot;));&#xa;jTextField4.setText(foldpath);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTextField4.setText(obj.wzconfigpath);"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
@@ -451,6 +455,7 @@
                     <StringItem index="4" value="Fastplay"/>
                   </StringArray>
                 </Property>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="jCheckBox1">
@@ -465,6 +470,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField5">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTextField5.setText(obj.wzdatadir);"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
@@ -479,8 +487,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField6">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTextField()"/>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="foldpath = ((System.getProperty(&quot;user.home&quot;))+(&quot;/Documents/Warzone 2100 3.1/mods/&quot;));&#xa;jTextField6.setText(foldpath);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTextField6.setText(obj.pathMods);"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="jButton10">
@@ -530,22 +537,31 @@
                           <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabel1" min="-2" pref="77" max="-2" attributes="0"/>
-                          <Component id="jScrollPane6" pref="153" max="32767" attributes="0"/>
-                          <Component id="jScrollPane5" alignment="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane4" min="-2" pref="157" max="-2" attributes="0"/>
-                          <Component id="jLabel2" min="-2" pref="88" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="jButton7" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                              <Component id="jButton4" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jLabel1" min="-2" pref="77" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane6" pref="153" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane5" alignment="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel2" min="-2" pref="88" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="jButton7" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                                      <Component id="jButton4" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jScrollPane4" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jButton11" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jButton12" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="560" max="32767" attributes="0"/>
+                      <EmptySpace pref="527" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -588,6 +604,12 @@
                               </Group>
                           </Group>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jButton11" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButton12" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -605,13 +627,13 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="DejaVu Sans Mono" size="12" style="0"/>
                     </Property>
-                    <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="new javax.swing.AbstractListModel() { wzL.WzFiles ff = new wzL.WzFiles();&#xa;    String[] strings = ff.removeHashFileEnds(ff.maplist());&#xa;    public int getSize() { return strings.length; }&#xa;    public Object getElementAt(int i) { return strings[i]; }&#xa;}" type="code"/>
-                    </Property>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                       <Color id="Default Cursor"/>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="DefaultListModel ls2m = new DefaultListModel();&#xa;jList2.setModel(ls2m);&#xa;wzL.WzFiles ff2m = new wzL.WzFiles();&#xa;    String[] strings2m = ff2m.removeHashFileEnds(ff2m.maplist());&#xa;for(int i=0;i&lt;strings2m.length;i++)&#xa;    ls2m.addElement(strings2m[i]);"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
@@ -663,9 +685,11 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButton7">
               <Properties>
-                <Property name="text" type="java.lang.String" value="add"/>
-                <Property name="enabled" type="boolean" value="false"/>
+                <Property name="text" type="java.lang.String" value="add map"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton7ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
@@ -692,7 +716,7 @@
                     <Property name="selectionMode" type="int" value="0"/>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="DefaultListModel ls2 = new DefaultListModel();&#xa;jList4.setModel(ls2);&#xa;wzL.WzFiles ff2 = new wzL.WzFiles();&#xa;    String[] strings2 = ff.modlist(false);&#xa;for(int i=0;i&lt;strings2.length;i++)&#xa;    ls2.addElement(strings2[i]);"/>
+                    <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="DefaultListModel ls2 = new DefaultListModel();&#xa;jList4.setModel(ls2);&#xa;wzL.WzFiles ff2 = new wzL.WzFiles();&#xa;    String[] strings2 = ff2.modlist(false);&#xa;for(int i=0;i&lt;strings2.length;i++)&#xa;    ls2.addElement(strings2[i]);"/>
                   </AuxValues>
                 </Component>
               </SubComponents>
@@ -711,6 +735,19 @@
                   <Font name="DejaVu Sans Mono" size="12" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="DeActivete"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButton11">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="add mod"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton11ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButton12">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="del"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -799,7 +836,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Droid Sans" size="12" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="&lt;html&gt; This launcher made by Kaynix for warzone2100 players to make online play more comfortable.&lt;br&gt; &#xa;If you have any suggestions/improvments or found bug contact me kaynix29@gmail.com or at forum pm to &lt;b&gt;Terminator&lt;/b&gt;&lt;br&gt; &#xa;Warzone2100 Online version alpha 0.14a:&lt;br&gt; &#xa;- chat improvments&lt;br&gt; - add mods managment&lt;br&gt; &#xa;- add support for windows and linux OS (no MAC OS)&lt;br&gt; &#xa;- few bug fixes&lt;br&gt;&#xa;- fixed --join 2 launches of warzone(for --host too)&lt;br&gt;&#xa;- fixed web IRC users wasn&apos;t parsing in main chat&lt;br&gt;&#xa;&#xa; &lt;br&gt; &lt;p&gt;run launcher in terminal to see logs.&lt;/p&gt; &#xa;&lt;/html&gt;" noResource="true"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt; This launcher made by Kaynix for warzone2100 players to make online play more comfortable.&lt;br&gt;  If you have any suggestions/improvments or found bug contact me kaynix29@gmail.com or at forum pm to &lt;b&gt;Terminator&lt;/b&gt;&lt;br&gt;  Warzone2100 Online version alpha 0.14a:&lt;br&gt;  - chat improvments&lt;br&gt; - add mods managment&lt;br&gt;  - add support for windows and linux OS (no MAC OS)&lt;br&gt;  - few bug fixes&lt;br&gt; - fixed --join 2 launches of warzone(for --host too)&lt;br&gt; - fixed web IRC users wasn&apos;t parsing in main chat&lt;br&gt;   &lt;br&gt; &lt;p&gt;run launcher in terminal to see logs.&lt;/p&gt;  &lt;/html&gt;" noResource="true"/>
                 <Property name="verticalAlignment" type="int" value="1"/>
               </Properties>
             </Component>

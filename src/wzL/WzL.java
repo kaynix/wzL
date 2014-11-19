@@ -21,7 +21,8 @@ public class WzL {
         
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                System.out.println(info.getName());
+              //  System.out.println(info.getName());
+              //  System.out.println(System.getProperty("user.dir"));
                 if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;

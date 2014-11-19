@@ -24,8 +24,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
 import javax.swing.ListModel;
 import javax.swing.Timer;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import sun.awt.image.ToolkitImage;
 
 /**
@@ -85,10 +87,10 @@ public class NJFrm extends javax.swing.JFrame {
 
         
             try {
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
+              /*  BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
                         socket.getOutputStream()));
                 BufferedReader reader = new BufferedReader(new InputStreamReader(
-                        socket.getInputStream()));
+                        socket.getInputStream()));*/
                 
              //   DefaultListModel listModel = (DefaultListModel)jList1.getModel();
                 
@@ -158,7 +160,7 @@ public class NJFrm extends javax.swing.JFrame {
     public NJFrm() {
         this.NICK = "wzPLayer";
         initComponents();
-        connectToServer();
+      //  connectToServer();
         jTextField2.setText(this.NICK);
         Timer t = new Timer(60000, new ActionListener() { //timer for gamelist refresh 60 sec
 
@@ -252,11 +254,13 @@ public class NJFrm extends javax.swing.JFrame {
         DefaultListModel ls2 = new DefaultListModel();
         jList4.setModel(ls2);
         wzL.WzFiles ff2 = new wzL.WzFiles();
-        String[] strings2 = ff.modlist(false);
+        String[] strings2 = ff2.modlist(false);
         for(int i=0;i<strings2.length;i++)
         ls2.addElement(strings2[i]);
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jButton11 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
@@ -271,6 +275,9 @@ public class NJFrm extends javax.swing.JFrame {
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
             }
         });
 
@@ -415,6 +422,9 @@ public class NJFrm extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Main", jPanel1);
 
+        WzFiles obj = new WzFiles();
+        jTextField3.setText(obj.wzapath);
+
         jLabel3.setText("Game Path");
         jLabel3.setToolTipText("Find warzone2100 executable file");
 
@@ -424,25 +434,26 @@ public class NJFrm extends javax.swing.JFrame {
         jButton9.setText("config");
         jButton9.setEnabled(false);
 
-        String foldpath = ((System.getProperty("user.home"))+("/Documents/Warzone 2100 3.1/config"));
-        jTextField4.setText(foldpath);
+        jTextField4.setText(obj.wzconfigpath);
 
         jLabel4.setText("Config dir");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Alpha", "Beta", "Gamma", "Tutorial", "Fastplay" }));
+        jComboBox1.setEnabled(false);
 
         jCheckBox1.setText("Start game from");
         jCheckBox1.setEnabled(false);
 
         jLabel5.setText("Data dir");
 
+        jTextField5.setText(obj.wzdatadir);
+
         jLabel6.setText("(Linux only ?)");
 
         jLabel7.setText("Mod dir");
         jLabel7.setToolTipText("Find warzone2100 executable file");
 
-        foldpath = ((System.getProperty("user.home"))+("/Documents/Warzone 2100 3.1/mods/"));
-        jTextField6.setText(foldpath);
+        jTextField6.setText(obj.pathMods);
 
         jButton10.setText("browse...");
         jButton10.setEnabled(false);
@@ -544,12 +555,13 @@ public class NJFrm extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Options", jPanel2);
 
+        DefaultListModel ls2m = new DefaultListModel();
+        jList2.setModel(ls2m);
+        wzL.WzFiles ff2m = new wzL.WzFiles();
+        String[] strings2m = ff2m.removeHashFileEnds(ff2m.maplist());
+        for(int i=0;i<strings2m.length;i++)
+        ls2m.addElement(strings2m[i]);
         jList2.setFont(new java.awt.Font("DejaVu Sans Mono", 0, 12)); // NOI18N
-        jList2.setModel(new javax.swing.AbstractListModel() { wzL.WzFiles ff = new wzL.WzFiles();
-            String[] strings = ff.removeHashFileEnds(ff.maplist());
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jList2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane4.setViewportView(jList2);
 
@@ -574,8 +586,12 @@ public class NJFrm extends javax.swing.JFrame {
             }
         });
 
-        jButton7.setText("add");
-        jButton7.setEnabled(false);
+        jButton7.setText("add map");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("MODs");
 
@@ -591,6 +607,15 @@ public class NJFrm extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("DejaVu Sans Mono", 0, 12)); // NOI18N
         jLabel10.setText("DeActivete");
 
+        jButton11.setText("add mod");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+
+        jButton12.setText("del");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -604,19 +629,25 @@ public class NJFrm extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton7)
-                        .addGap(22, 22, 22)
-                        .addComponent(jButton4)))
-                .addContainerGap(560, Short.MAX_VALUE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jButton7)
+                                .addGap(22, 22, 22)
+                                .addComponent(jButton4))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jButton11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton12)))
+                .addContainerGap(527, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -647,7 +678,12 @@ public class NJFrm extends javax.swing.JFrame {
                                 .addComponent(jButton6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel10))
-                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton11)
+                    .addComponent(jButton12))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Mods/Maps", jPanel3);
@@ -676,7 +712,7 @@ public class NJFrm extends javax.swing.JFrame {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wzL/wz_faceboook_logo.png"))); // NOI18N
 
         jLabel12.setFont(new java.awt.Font("Droid Sans", 0, 12)); // NOI18N
-        jLabel12.setText("<html> This launcher made by Kaynix for warzone2100 players to make online play more comfortable.<br> \nIf you have any suggestions/improvments or found bug contact me kaynix29@gmail.com or at forum pm to <b>Terminator</b><br> \nWarzone2100 Online version alpha 0.14a:<br> \n- chat improvments<br> - add mods managment<br> \n- add support for windows and linux OS (no MAC OS)<br> \n- few bug fixes<br>\n- fixed --join 2 launches of warzone(for --host too)<br>\n- fixed web IRC users wasn't parsing in main chat<br>\n\n <br> <p>run launcher in terminal to see logs.</p> \n</html>"); // NOI18N
+        jLabel12.setText("<html> This launcher made by Kaynix for warzone2100 players to make online play more comfortable.<br>  If you have any suggestions/improvments or found bug contact me kaynix29@gmail.com or at forum pm to <b>Terminator</b><br>  Warzone2100 Online version alpha 0.14a:<br>  - chat improvments<br> - add mods managment<br>  - add support for windows and linux OS (no MAC OS)<br>  - few bug fixes<br> - fixed --join 2 launches of warzone(for --host too)<br> - fixed web IRC users wasn't parsing in main chat<br>   <br> <p>run launcher in terminal to see logs.</p>  </html>"); // NOI18N
         jLabel12.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -869,6 +905,7 @@ public class NJFrm extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         try {
             // TODO add your handling code here:
+            System.out.println("irc >> /quit.");
             writer.write("QUIT");
             writer.flush();
             System.out.println("irc >> /quit.");
@@ -907,9 +944,9 @@ public class NJFrm extends javax.swing.JFrame {
        String modname;
       
         if (System.getProperty("os.name").contains("Windows")) {
-            modDirPath = ((System.getProperty("user.home")) + ("/Documents/Warzone 2100 3.1/mods/"));
+            modDirPath = (System.getProperty("user.home")) + ("/Documents/Warzone 2100 3.1/mods/");
         } else {
-            modDirPath = ((System.getProperty("user.home")) + ("/.warzone2100-3.1/mods/")); //linux folderpath
+            modDirPath = (System.getProperty("user.home")) + ("/.warzone2100-3.1/mods/"); //linux folderpath
         }
         modname = (String)jList4.getSelectedValue(); System.out.println(modDirPath+modname); 
         try{
@@ -924,9 +961,84 @@ public class NJFrm extends javax.swing.JFrame {
         ls.addElement(modname);
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+      try {
+            // TODO add your handling code here:
+            writer.write("QUIT");
+            writer.flush();
+            System.out.println("irc >> /quit.");
+        } catch (IOException ex) {
+            Logger.getLogger(NJFrm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowClosing
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fc = new JFileChooser();
+        fc.setAcceptAllFileFilterUsed(false);
+        fc.addChoosableFileFilter(new FileNameExtensionFilter("Warzone map/mod files *.wz","wz"));
+        
+        if (evt.getSource() == jButton7) {
+        int returnVal = fc.showOpenDialog(NJFrm.this);
+        
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            DefaultListModel ls = (DefaultListModel) jList2.getModel();
+            ls.addElement(file.getName());
+            WzFiles wzf = new WzFiles();
+            System.out.println("Opening: " + file.getName() + ".");
+            String mapsDirPath = wzf.pathMaps;
+            
+                try {
+
+                    file.renameTo(new File(mapsDirPath + file.getName()));
+                } catch (Exception io) {
+                    System.out.println("Error moving Map file ::Adding error:: \r\n");
+                }
+
+            } else {
+                System.out.println("Open command cancelled by user :: Adding Map error ::");
+            }
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fc = new JFileChooser();
+        fc.setAcceptAllFileFilterUsed(false);
+        fc.addChoosableFileFilter(new FileNameExtensionFilter("Warzone map/mod files *.wz","wz"));
+        
+        if (evt.getSource() == jButton11) {
+        int returnVal = fc.showOpenDialog(NJFrm.this);
+        
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            DefaultListModel ls = (DefaultListModel) jList4.getModel();
+            ls.addElement(file.getName());
+            WzFiles wzf = new WzFiles();
+            System.out.println("Opening: " + file.getName() + ".");
+            String modsDirPath = wzf.pathMods;
+            
+                try {
+
+                    file.renameTo(new File(modsDirPath + file.getName()));
+                } catch (Exception io) {
+                    System.out.println("Error moving MOD file :: Adding error ::");
+                }
+
+            } else {
+                System.out.println("Open command cancelled by user :: Adding MOD error ::");
+            }
+        }
+    }//GEN-LAST:event_jButton11ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
