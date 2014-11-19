@@ -36,7 +36,6 @@ public class WzFiles {
             pathMods = userHome + ("/.warzone2100-3.1/mods/");
             pathAutoLoad = userHome + ("/.warzone2100-3.1/mods/autoload/");
             wzapath = (System.getProperty("user.dir")) + "/warzone2100";
-            System.out.println(wzapath);
 
         }
     }
