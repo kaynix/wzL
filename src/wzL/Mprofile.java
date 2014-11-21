@@ -6,12 +6,8 @@
 package wzL;
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.StringTokenizer;
@@ -31,34 +27,37 @@ public class Mprofile {
     int playedGames;
     String playerName;
     final String version = "WZ.STA.v3";
-    private void calcRank(){
+    
+    
+    Rank[] calcRank(){
+        Rank[] rankmask = new Rank[4];
         if (wins + losses < 5) { //check is it noob or what ?
-            String noobmedal;
+            rankmask[0] = Rank.NOOB;
         } else {
             //1st star
             if (totalKills > 600) {
-                String gold;
+                rankmask[1] = Rank.GOLD;// gold;
             } else if (totalKills > 300) {
-                String silver;
+                rankmask[1] = Rank.SILVER; // silver;
             } else if (totalKills > 150) {
-                String bronze;
+                rankmask[1] = Rank.BRONZE;// bronze;
             }
         //2nd star  games played (Cannot use stat.played, since that's just 
             //the number of times the player exited via the game menu, not the number of games played.)
             if (wins + losses > 200) {
-                String gold2;
+                rankmask[2] = Rank.GOLD;// gold2;
             } else if (wins + losses > 100) {
-                String silver2;
+                rankmask[2] = Rank.SILVER;// silver2;
             } else if (wins + losses > 50) {
-                String bronze2;
+                rankmask[2] = Rank.BRONZE;// bronze2;
             }
             //3rd star 
             if (wins > 80) {
-                String gold3;
+                rankmask[3] = Rank.GOLD;// gold3;
             } else if (wins > 40) {
-                String silver3;
+                rankmask[3] = Rank.SILVER;// silver3;
             } else if (wins > 10) {
-                String bronze3;
+                rankmask[3] = Rank.BRONZE;// bronze3;
             }
             //final MP medal wins:lose ratio
             if ((wins >= 6) && (wins > (2 * losses))) // bronze requirement.
@@ -67,18 +66,19 @@ public class Mprofile {
                 {
                     if ((wins >= 24) && (wins > (8 * losses))) // gold requirement
                     {
-                        String goldmedal;
+                        rankmask[0] = Rank.GOLD;// goldmedal;
                     } else {
-                        String silvermedal;
+                        rankmask[0] = Rank.SILVER;// silvermedal;
                     }
                 } else {
-                    String bronzemedal;
+                    rankmask[0] = Rank.BRONZE;// bronzemedal;
                 }
             }
         }
+        return rankmask;
     }
     Mprofile(String playerFile) throws IOException{
-        WzFiles obj = new WzFiles();
+        WzFiles obj = new WzFiles(); playerName = playerFile;
         File file = new File(obj.wzconfigpath + "multiplay/players/" + playerName);
         String str = null;
         try {
@@ -104,4 +104,9 @@ public class Mprofile {
     }
     
     
+}
+
+enum Rank {
+
+    NOOB, GOLD, SILVER, BRONZE;
 }

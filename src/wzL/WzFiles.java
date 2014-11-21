@@ -35,7 +35,7 @@ public class WzFiles {
             pathMaps = userHome + ("/.warzone2100-3.1/maps/");
             pathMods = userHome + ("/.warzone2100-3.1/mods/");
             pathAutoLoad = userHome + ("/.warzone2100-3.1/mods/autoload/");
-            wzapath = (System.getProperty("user.dir")) + "/warzone2100";
+            wzapath = wzdatadir + "/warzone2100";
 
         }
     }
@@ -51,6 +51,17 @@ public class WzFiles {
             {
              list[fileInList] = files[fileInList].getName();
             }
+        return list;
+    } 
+    
+    public String[] profilelist(){
+        String foldpath = wzconfigpath+"multiplay/players/";
+        File file = new File(foldpath);  
+        FilenameFilter onlyWz = new OnlyExt("sta");
+        File[] files = file.listFiles(onlyWz);
+        String[] list= new String[files.length];
+        for (int fileInList = 0; fileInList < files.length; fileInList++)
+             list[fileInList] = files[fileInList].getName();  
         return list;
     } 
     String [] removeHashFileEnds(String [] list){
