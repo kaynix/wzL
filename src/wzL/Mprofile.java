@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +25,7 @@ public class Mprofile {
     int wins;
     int losses;
     int totalKills;
-    int totalScore;
+    long totalScore;
     int playedGames;
     String playerName;
     final String version = "WZ.STA.v3";
@@ -75,7 +77,40 @@ public class Mprofile {
                 }
             }
         }
+ //       System.out.println("RankmaskCalc: "+Arrays.deepToString(rankmask));
         return rankmask;
+    }
+    URL[] getRankIcons(Rank[] rankmask){
+        URL[] iconmask = new URL[4];
+        if (rankmask[0] == Rank.NOOB) {
+            iconmask[0] = getClass().getResource("/wzL/medal_dummy.png");
+        } else {
+            for (int i=0; i<4;i++) {
+                if(rankmask[i]==null) continue;
+                switch (rankmask[i]) {
+                   /* case NOOB:
+                        iconmask[r.ordinal()] = getClass().getResource("/wzL/medal_dummy.png");
+                        break;*/
+                    case GOLD:
+                        iconmask[i] = getClass().getResource("/wzL/multirank1.png");
+                        if(i==0) iconmask[i] = getClass().getResource("/wzL/medal_gold.png"); //if its medal iteration
+                        break;
+                    case SILVER:
+                        iconmask[i] = getClass().getResource("/wzL/multirank2.png");
+                        if(i==0) iconmask[i] = getClass().getResource("/wzL/medal_silver.png"); //if its medal iteration
+                        break;
+                    case BRONZE:
+                        iconmask[i] = getClass().getResource("/wzL/multirank3.png");
+                        if(i==0) iconmask[i] = getClass().getResource("/wzL/medal_bronze.png"); //if its medal iteration
+                        break;
+                    default:
+                        iconmask[i] = null;
+                        break;
+                }
+            }
+        }
+
+        return iconmask;
     }
     Mprofile(String playerFile) throws IOException{
         WzFiles obj = new WzFiles(); playerName = playerFile;
@@ -95,7 +130,7 @@ public class Mprofile {
         wins = Integer.parseInt(ss.nextToken());
         losses = Integer.parseInt(ss.nextToken());
         totalKills = Integer.parseInt(ss.nextToken());
-        totalScore = Integer.parseInt(ss.nextToken());
+        totalScore = Long.parseLong(ss.nextToken());
         playedGames = Integer.parseInt(ss.nextToken());
         //int[] bufi= {wins,losses,totalKills,totalScore,playedGames}; 
        // System.out.print(ss.countTokens());

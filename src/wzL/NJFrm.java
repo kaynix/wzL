@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.net.URL;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,10 +24,9 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
-import javax.swing.JComponent;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
-import javax.swing.JLabel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerListModel;
 import javax.swing.Timer;
@@ -176,6 +176,7 @@ public class NJFrm extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("warzone2100_128x128.png")));
        
     }
+    
 
     public void appendtext(String line) {
         jTextArea1.append(line);
@@ -484,30 +485,11 @@ public class NJFrm extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLstar1)
-                    .addComponent(jLstar2)
-                    .addComponent(jLstar3)
-                    .addComponent(jLmedal))
-                .addGap(0, 59, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jLstar1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLstar3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLstar2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLmedal)
-                .addGap(0, 47, Short.MAX_VALUE))
-        );
+        jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.LINE_AXIS));
+        jPanel6.add(jLstar1);
+        jPanel6.add(jLstar2);
+        jPanel6.add(jLstar3);
+        jPanel6.add(jLmedal);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -564,7 +546,7 @@ public class NJFrm extends javax.swing.JFrame {
                 .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(279, Short.MAX_VALUE))
+                .addContainerGap(338, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -602,7 +584,7 @@ public class NJFrm extends javax.swing.JFrame {
                     .addComponent(jCheckBox2)
                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(247, Short.MAX_VALUE))
+                .addContainerGap(259, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Options", jPanel2);
@@ -804,7 +786,7 @@ public class NJFrm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
 
         pack();
@@ -1100,8 +1082,31 @@ public class NJFrm extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             Mprofile mp = new Mprofile((String)jSpinner1.getValue());
-            Rank[] rankmask = mp.calcRank();
-            jLstar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wzL/medal_dummy.png")));
+     //       System.out.println((String)jSpinner1.getValue());
+    //        System.out.println(mp.wins+" "+mp.losses+" "+mp.totalKills+" "+mp.totalScore+" ");
+
+            URL[] iconmask = mp.getRankIcons(mp.calcRank());
+           // jLstar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wzL/medal_dummy.png")));
+            jLmedal.setIcon(null);
+            if(iconmask[0]!=null)
+            jLmedal.setIcon(new javax.swing.ImageIcon(iconmask[0]));
+            
+            jLstar1.setIcon(null);
+            if(iconmask[1]!=null)
+            jLstar1.setIcon(new javax.swing.ImageIcon(iconmask[1]));
+            
+            jLstar2.setIcon(null);
+            if(iconmask[2]!=null)
+            jLstar2.setIcon(new javax.swing.ImageIcon(iconmask[2]));
+            
+            jLstar3.setIcon(null);
+            if(iconmask[3]!=null)
+            jLstar3.setIcon(new javax.swing.ImageIcon(iconmask[3]));
+            
+            
+         //   for(int i=0;i<4;i++)
+         //       System.out.println(iconmask[i]);
+            
         } catch (IOException ex) {
             Logger.getLogger(NJFrm.class.getName()).log(Level.SEVERE, null, ex);
         }
