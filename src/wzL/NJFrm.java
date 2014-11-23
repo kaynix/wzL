@@ -277,7 +277,7 @@ public class NJFrm extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Warzone Online Launcher alpha 0.14a");
+        setTitle("Warzone Online Launcher alpha 0.15");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFont(new java.awt.Font("DejaVu Sans", 0, 12)); // NOI18N
         setMinimumSize(new java.awt.Dimension(640, 580));
@@ -631,11 +631,16 @@ public class NJFrm extends javax.swing.JFrame {
         for(int i=0;i<strings2m.length;i++)
         ls2m.addElement(strings2m[i]);
         jList2.setFont(new java.awt.Font("DejaVu Sans Mono", 0, 12)); // NOI18N
+        jList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jList2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane4.setViewportView(jList2);
 
         jButton4.setText("del");
-        jButton4.setEnabled(false);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jList3.setFont(new java.awt.Font("DejaVu Sans Mono", 0, 12)); // NOI18N
         jList3.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -684,7 +689,6 @@ public class NJFrm extends javax.swing.JFrame {
         });
 
         jButton12.setText("del");
-        jButton12.setEnabled(false);
         jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton12ActionPerformed(evt);
@@ -787,7 +791,7 @@ public class NJFrm extends javax.swing.JFrame {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wzL/wz_faceboook_logo.png"))); // NOI18N
 
         jLabel12.setFont(new java.awt.Font("Droid Sans", 0, 12)); // NOI18N
-        jLabel12.setText("<html> This launcher made by Kaynix for warzone2100 players to make online play more comfortable.<br>  If you have any suggestions/improvments or found bug contact me kaynix29@gmail.com or at forum pm to <b>Terminator</b><br>  Warzone2100 Online version alpha 0.14a:<br>  - chat improvments<br> - add mods managment<br>  - add support for windows and linux OS (no MAC OS)<br>  - few bug fixes<br> - fixed --join 2 launches of warzone(for --host too)<br> - fixed web IRC users wasn't parsing in main chat<br>   <br> <p>run launcher in terminal to see logs.</p>  </html>"); // NOI18N
+        jLabel12.setText("<html> This launcher made by Kaynix for warzone2100 players to make online play more comfortable.<br>\nIf you have any suggestions/improvments or found bug contact me kaynix29@gmail.com or at forum pm to <b>Terminator</b>\n<br>\nWarzone2100 Online version alpha 0.15:<br>\n- added profiles<br>\n- preparing ladder background<br>\n- improved mods managment<br>\n- improved maps managment<br>\n- bug fixes<br>\n<br>\n<p>run launcher in terminal to see logs.</p>\n<br>\n\n<p>For more info visit wz2100.net or warzone2100.org.ua </p>\n<br>\n<p>source code: github.com/kaynix/wzL </p>\n</html>"); // NOI18N
         jLabel12.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -1111,6 +1115,22 @@ public class NJFrm extends javax.swing.JFrame {
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
+        String mapname;
+         WzFiles ff = new WzFiles();
+      
+        mapname = (String)jList4.getSelectedValue(); //System.out.println(ff.pathMaps+mapname);
+        
+        try{
+        File mfile = new File(ff.pathMods+mapname); 
+        System.out.println(mfile.getName());
+        if(mfile.exists()) mfile.delete();
+       // mfile.renameTo(new File(modDirPath+"autoload/"+mapname));
+        } catch (Exception io){
+            System.out.println("Error deleting mod file ::Activation error:: \r\n");
+        }
+        // refreshing GUI lists
+        DefaultListModel ls  = (DefaultListModel) jList4.getModel();
+        ls.removeElement(mapname);
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void MprofileChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_MprofileChanged
@@ -1146,6 +1166,26 @@ public class NJFrm extends javax.swing.JFrame {
             Logger.getLogger(NJFrm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_MprofileChanged
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+         String mapname;
+         WzFiles ff = new WzFiles();
+      
+        mapname = (String)jList2.getSelectedValue(); //System.out.println(ff.pathMaps+mapname);
+        
+        try{
+        File mfile = new File(ff.pathMaps+ff.addHashFileEnd(mapname)); 
+        System.out.println(mfile.getName());
+        if(mfile.exists()) mfile.delete();
+       // mfile.renameTo(new File(modDirPath+"autoload/"+mapname));
+        } catch (Exception io){
+            System.out.println("Error deleting map file ::Activation error:: \r\n");
+        }
+        // refreshing GUI lists
+        DefaultListModel ls  = (DefaultListModel) jList2.getModel();
+        ls.removeElement(mapname);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

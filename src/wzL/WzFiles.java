@@ -40,6 +40,17 @@ public class WzFiles {
         }
     }
     
+    public String[] profilelist(){
+        String foldpath = wzconfigpath+"multiplay/players/";
+        File file = new File(foldpath);  
+        FilenameFilter onlyWz = new OnlyExt("sta");
+        File[] files = file.listFiles(onlyWz);
+        String[] list= new String[files.length];
+        for (int fileInList = 0; fileInList < files.length; fileInList++)
+             list[fileInList] = files[fileInList].getName();  
+        return list;
+    } 
+    
     public String[] maplist(){
         String foldpath = pathMaps;
     //   System.out.println("User Home Path: " + System.getenv("UserProfile"));
@@ -53,17 +64,7 @@ public class WzFiles {
             }
         return list;
     } 
-    
-    public String[] profilelist(){
-        String foldpath = wzconfigpath+"multiplay/players/";
-        File file = new File(foldpath);  
-        FilenameFilter onlyWz = new OnlyExt("sta");
-        File[] files = file.listFiles(onlyWz);
-        String[] list= new String[files.length];
-        for (int fileInList = 0; fileInList < files.length; fileInList++)
-             list[fileInList] = files[fileInList].getName();  
-        return list;
-    } 
+       
     String [] removeHashFileEnds(String [] list){
         for(int i=0;i<list.length;i++){
             if(list[i].lastIndexOf('-')<=3)
@@ -72,6 +73,15 @@ public class WzFiles {
         }
      return list;       
     }
+    
+    String addHashFileEnd(String mapname) {
+        String[] mls = maplist();
+        for (String ml : mls) 
+            if (ml.startsWith(mapname)) 
+                return ml; 
+        return null;
+    }
+    
     public String[] modlist(boolean autoload){
        String foldpath =pathMods;
         mkRmALinModsfold(foldpath);
