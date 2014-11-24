@@ -5,7 +5,10 @@
 package wzL;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FilenameFilter;
+import java.util.Properties;
 
 /**
  *
@@ -138,6 +141,19 @@ public class WzFiles {
       System.out.println("DIR 'autoload' - created"); 
   }
     }
+    void setWzConfig(String key, String val){
+        try{
+      Properties p = new Properties();
+      p.load(new FileInputStream(wzconfigpath+"/config"));
+      //System.out.println("masterserver_name = " + p.getProperty("mapHash"));
+     // p.list(System.out);
+      p.setProperty(key, val);
+      p.store(new FileOutputStream(wzconfigpath+"/config"), "/* Config file updated with WzLauncher*/");
+      }
+    catch (Exception e) {
+      System.out.println(e);
+      }
+}
     
 }
 

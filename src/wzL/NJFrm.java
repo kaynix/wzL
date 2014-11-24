@@ -24,7 +24,6 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
 import javax.swing.JSpinner;
@@ -67,14 +66,14 @@ public class NJFrm extends javax.swing.JFrame {
             socket = new Socket(SERVER, DEFAULT_PORT);
             writer = new BufferedWriter(new OutputStreamWriter(
                     socket.getOutputStream()));
-            BufferedReader reader = new BufferedReader(new InputStreamReader(
+            reader = new BufferedReader(new InputStreamReader(
                     socket.getInputStream()));
             new Thread(new Incoming()).start();            
             int random = (int )(Math.random() * 100 + 1);
             NICK = NICK + random;
             writer.write("NICK " + NICK + "\r\n");
             writer.write("USER " + NICK
-                    + " 8 * : Kaynix's IRC chat application\r\n");
+                    + " 8 * : Kaynix's IRC WZ2100 Launcher\r\n");
             writer.flush();
         } catch (Exception e) {
             System.exit(0);
@@ -162,7 +161,7 @@ public class NJFrm extends javax.swing.JFrame {
     public NJFrm() {
         this.NICK = "wzPLayer";
         initComponents();
-      //  connectToServer();
+        connectToServer();
         jTextField2.setText(this.NICK);
         Timer t = new Timer(60000, new ActionListener() { //timer for gamelist refresh 60 sec
 
@@ -241,6 +240,9 @@ public class NJFrm extends javax.swing.JFrame {
         jLstar2 = new javax.swing.JLabel();
         jLstar3 = new javax.swing.JLabel();
         jLmedal = new javax.swing.JLabel();
+        jCheckBox3 = new javax.swing.JCheckBox("Fullscreen", true);
+        jButton13 = new javax.swing.JButton();
+        jButton14 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jList2 = new javax.swing.JList();
@@ -277,7 +279,7 @@ public class NJFrm extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Warzone Online Launcher alpha 0.15");
+        setTitle("Warzone Launcher alpha 0.15");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFont(new java.awt.Font("DejaVu Sans", 0, 12)); // NOI18N
         setMinimumSize(new java.awt.Dimension(640, 580));
@@ -433,6 +435,7 @@ public class NJFrm extends javax.swing.JFrame {
 
         WzFiles obj = new WzFiles();
         jTextField3.setText(obj.wzapath);
+        jTextField3.setEditable(false);
 
         jLabel3.setText("Game Path");
         jLabel3.setToolTipText("Find warzone2100 executable file");
@@ -444,6 +447,7 @@ public class NJFrm extends javax.swing.JFrame {
         jButton9.setEnabled(false);
 
         jTextField4.setText(obj.wzconfigpath);
+        jTextField4.setEditable(false);
 
         jLabel4.setText("Config dir");
 
@@ -451,24 +455,29 @@ public class NJFrm extends javax.swing.JFrame {
         jComboBox1.setEnabled(false);
 
         jCheckBox1.setText("Start game from");
-        jCheckBox1.setEnabled(false);
+        jCheckBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                startGameFromHandler(evt);
+            }
+        });
 
         jLabel5.setText("Data dir");
 
         jTextField5.setText(obj.wzdatadir);
+        jTextField5.setEditable(false);
 
-        jLabel6.setText("(Linux only ?)");
+        jLabel6.setText("MP profile");
 
         jLabel7.setText("Mod dir");
         jLabel7.setToolTipText("Find warzone2100 executable file");
 
         jTextField6.setText(obj.pathMods);
+        jTextField6.setEditable(false);
 
         jButton10.setText("browse...");
         jButton10.setEnabled(false);
 
         jCheckBox2.setText("Resolution");
-        jCheckBox2.setEnabled(false);
 
         jTextField7.setText("1600");
 
@@ -524,69 +533,94 @@ public class NJFrm extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
         );
 
+        jCheckBox3.setText("Fullscreen");
+
+        jButton13.setFont(new java.awt.Font("DejaVu Sans Mono", 1, 12)); // NOI18N
+        jButton13.setText("Apply");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
+
+        jButton14.setFont(new java.awt.Font("DejaVu Sans Mono", 1, 12)); // NOI18N
+        jButton14.setText("RunGame");
+        jButton14.setEnabled(false);
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton9)
-                                    .addComponent(jLabel6)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton9))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton8)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(280, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBox2)
+                                    .addComponent(jCheckBox3))
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
                                         .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButton10))))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox2)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton13))))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton10))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jCheckBox1)
                                 .addGap(18, 18, 18)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton8)))
-                .addGap(18, 18, 18)
-                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(283, Short.MAX_VALUE))
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton14)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
@@ -600,26 +634,31 @@ public class NJFrm extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
                     .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(255, Short.MAX_VALUE))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBox1)
+                            .addComponent(jButton14))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCheckBox2)
+                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox3))
+                    .addComponent(jButton13))
+                .addContainerGap(227, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Options", jPanel2);
@@ -791,7 +830,7 @@ public class NJFrm extends javax.swing.JFrame {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wzL/wz_faceboook_logo.png"))); // NOI18N
 
         jLabel12.setFont(new java.awt.Font("Droid Sans", 0, 12)); // NOI18N
-        jLabel12.setText("<html> This launcher made by Kaynix for warzone2100 players to make online play more comfortable.<br>\nIf you have any suggestions/improvments or found bug contact me kaynix29@gmail.com or at forum pm to <b>Terminator</b>\n<br>\nWarzone2100 Online version alpha 0.15:<br>\n- added profiles<br>\n- preparing ladder background<br>\n- improved mods managment<br>\n- improved maps managment<br>\n- bug fixes<br>\n<br>\n<p>run launcher in terminal to see logs.</p>\n<br>\n\n<p>For more info visit wz2100.net or warzone2100.org.ua </p>\n<br>\n<p>source code: github.com/kaynix/wzL </p>\n</html>"); // NOI18N
+        jLabel12.setText("<html> This launcher made by Kaynix for warzone2100 players to make online play more comfortable.<br>\nIf you have any suggestions/improvments or found bug contact me kaynix29@gmail.com or at forum pm to <b>Terminator</b>\n<br>\nWarzone2100 Launcher version alpha 0.15:<br>\n- added profiles<br>\n- added delete mod button<br>\n- added delete map button<br>\n- preparing ladder background<br>\n- improved mods managment<br>\n- improved maps managment<br>\n- enabled launching game from campaign Alpha,Beta,Gamma<br>\n- enabled fullscreen/resolution changer(direct writting to config file)<br>\n- bug fixes<br>\n<br>\n<p>run launcher in terminal to see logs.</p>\n<br>\n\n<p>For more info visit wz2100.net or warzone2100.org.ua </p>\n<br>\n<p>source code: github.com/kaynix/wzL </p>\n</html>"); // NOI18N
         jLabel12.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -858,63 +897,6 @@ public class NJFrm extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_hndlr
-    
-
-    void chatrun() {
-        try {
-            String server = "irc.freenode.net";
-            String nick = "simple_bot";
-            String login = "simple_bot";
-
-            // The channel which the bot will join.
-            String channel = "#irchacks";
-
-            Socket socket = new Socket(server, 6667);
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
-            // Log on to the server.
-            writer.write("NICK " + nick + "\r\n");
-            writer.write("USER " + login + " 8 * : Java IRC Bot\r\n");
-            writer.flush();
-
-            line = null;
-            while ((line = reader.readLine()) != null) {
-                if (line.indexOf("004") >= 0) {
-                    // We are now logged in.
-                    break;
-                } else if (line.indexOf("433") >= 0) {
-                    System.out.println("Nickname is already in use.");
-                    return;
-                }
-            }
-            line = null;
-            // Join the channel.
-            writer.write("JOIN " + channel + "\r\n");
-            writer.flush();
-
-            // Keep reading lines from the server.
-            while ((line = reader.readLine()) != null) {
-                if (line.toUpperCase().startsWith("PING ")) {
-                    // We must respond to PINGs to avoid being disconnected.
-                    writer.write("PONG " + line.substring(5) + "\r\n");
-                    // System.out.println(line);
-                    writer.write("PRIVMSG " + channel + " :I got pinged!\r\n");
-                    //  writer.write("PRIVMSG termix :R y receiving it ?\r\n");
-                    writer.flush();
-                    writer.write("NAMES #irchacks");
-                    writer.flush();
-                } else {
-                    // Print the raw line received by the bot.
-                    jTextArea1.append(line);
-                }
-            }
-        } catch (UnknownHostException ex) {
-            Logger.getLogger(Irchat.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Irchat.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
             Process p;
@@ -1187,11 +1169,63 @@ public class NJFrm extends javax.swing.JFrame {
         ls.removeElement(mapname);
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void startGameFromHandler(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_startGameFromHandler
+        // TODO add your handling code here:
+        Object obj = evt.getItemSelectable();
+        if (obj == jCheckBox1) {
+            if (jComboBox1.isEnabled()) {
+                jComboBox1.setEnabled(false);
+                jButton14.setEnabled(false);
+            } else {
+                jComboBox1.setEnabled(true);
+                jButton14.setEnabled(true);
+            }}
+    }//GEN-LAST:event_startGameFromHandler
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        // TODO add your handling code here:
+        WzFiles ff = new WzFiles();
+        if (jCheckBox3.isSelected())
+            ff.setWzConfig("fullscreen", "true"); else        
+            ff.setWzConfig("fullscreen", "false");
+        
+        if (jCheckBox2.isSelected()) {
+            ff.setWzConfig("width", jTextField7.getText().trim());
+            ff.setWzConfig("height", jTextField8.getText().trim());
+        }
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        // TODO add your handling code here:
+        Process p; String startfrom = null;  //--game=FASTPLAY --game=TUTORIAL3 --game=CAM_3A --game=CAM_1A --game=CAM_2A
+        switch((String)jComboBox1.getSelectedItem()){  
+            case "Alpha": startfrom="--game=CAM_1A"; break;
+                case "Beta": startfrom="--game=CAM_2A"; break;
+                    case "Gamma": startfrom="--game=CAM_3A"; break;
+                        case "Tutorial": startfrom="--game=TUTORIAL3"; break;
+                            case "Fastplay": startfrom="--game=FASTPLAY"; break;
+            
+        }
+        try {
+            // TODO add your handling code here:
+            if (System.getProperty("os.name").contains("Windows")) {
+                p = Runtime.getRuntime().exec("warzone2100.exe "+startfrom);
+            } else {
+            p = Runtime.getRuntime().exec("./warzone2100 "+startfrom);
+            }
+
+        } catch (IOException ex) {
+            Logger.getLogger(NJFrm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton14ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1202,6 +1236,7 @@ public class NJFrm extends javax.swing.JFrame {
     private javax.swing.JButton jButton9;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
