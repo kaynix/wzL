@@ -46,6 +46,26 @@ public class WzFiles {
 
         }
     }
+
+    /**
+     * this constructor for users that have custom wz config/game directories in
+     * this case we don't care about in witch OS we are in. Its receives
+     * location of wz config file and main game executable file.Its enough to
+     * identify other necessary game directories
+     *
+     * @param wzconfigpath wz config file location
+     * @param wzapath game main executable file location
+     */
+    
+    public WzFiles(String wzconfigpath, String wzapath){
+        userHome = System.getProperty("user.home");
+        wzdatadir = System.getProperty("user.dir");
+        this.wzconfigpath = wzconfigpath;
+        this.wzapath = wzapath;
+        this.pathMods = wzconfigpath + "/mods/";
+        this.pathMaps = wzconfigpath + "/maps/";
+        this.pathAutoLoad = pathMods + "autoload/";
+    }
     
     /**
      * Its looks for multiplayer profile files that are usually located at
