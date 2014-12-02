@@ -3,10 +3,6 @@
  * and open the template in the editor.
  */
 package wzL;
-
-import java.util.Arrays;
-
-
 /**
  *
  * @author kaynix

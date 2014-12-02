@@ -23,6 +23,10 @@ public class WzFiles {
     String pathMaps;
     String pathAutoLoad;
 
+    /**
+     * Default constructor with default configure folders Warzone settings its
+     * look to Documents user's folders, like: "/Documents/Warzone 2100 3.1/"
+     */
     public WzFiles() {
         userHome = System.getProperty("user.home");
         wzdatadir = System.getProperty("user.dir");
@@ -43,6 +47,12 @@ public class WzFiles {
         }
     }
     
+    /**
+     * Its looks for multiplayer profile files that are usually located at
+     * wzconfigpath+"multiplay/players/" returns String array of file names
+     *
+     * @return
+     */
     public String[] profilelist(){
         String foldpath = wzconfigpath+"multiplay/players/";
         File file = new File(foldpath);  
@@ -54,6 +64,12 @@ public class WzFiles {
         return list;
     } 
     
+    /**
+     * Returns String array of map file names. !!With hash endings, use
+     * removeHashFileEnds to remove for better looking names to fit in jList
+     *
+     * @return String array of map file names
+     */
     public String[] maplist(){
         String foldpath = pathMaps;
     //   System.out.println("User Home Path: " + System.getenv("UserProfile"));
@@ -85,6 +101,14 @@ public class WzFiles {
         return null;
     }
     
+    /**
+     * Returns String array of mod file names
+     *
+     * @param autoload set true if you want to include /autoload Wz folder to be
+     * scanned for available mods, if not only files in /Mods folder will be
+     * added
+     * @return String array of mod list file names
+     */
     public String[] modlist(boolean autoload){
        String foldpath =pathMods;
         mkRmALinModsfold(foldpath);
