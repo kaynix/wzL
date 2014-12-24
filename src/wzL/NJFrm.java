@@ -22,6 +22,7 @@ import java.util.Calendar;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.prefs.Preferences;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
@@ -159,8 +160,9 @@ public class NJFrm extends javax.swing.JFrame {
 
     public NJFrm() {
         this.NICK = "wzPLayer";
+        
         initComponents();
-        connectToServer();
+      //  connectToServer();
         jTextField2.setText(this.NICK);
         Timer t = new Timer(60000, new ActionListener() { //timer for gamelist refresh 60 sec
 
@@ -229,7 +231,6 @@ public class NJFrm extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
-        jButton10 = new javax.swing.JButton();
         jCheckBox2 = new javax.swing.JCheckBox();
         jTextField7 = new javax.swing.JTextField();
         jTextField8 = new javax.swing.JTextField();
@@ -278,7 +279,7 @@ public class NJFrm extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Warzone Launcher alpha 0.15");
+        setTitle("Warzone Launcher alpha 0.15a");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFont(new java.awt.Font("DejaVu Sans", 0, 12)); // NOI18N
         setMinimumSize(new java.awt.Dimension(640, 580));
@@ -435,15 +436,25 @@ public class NJFrm extends javax.swing.JFrame {
         WzFiles obj = new WzFiles();
         jTextField3.setText(obj.wzapath);
         jTextField3.setEditable(false);
+        jTextField3.setFont(new java.awt.Font("DejaVu Sans Mono", 0, 12)); // NOI18N
 
-        jLabel3.setText("Game Path");
+        jLabel3.setText("Game exe Path");
         jLabel3.setToolTipText("Find warzone2100 executable file");
 
         jButton8.setText("browse...");
-        jButton8.setEnabled(false);
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
-        jButton9.setText("config");
-        jButton9.setEnabled(false);
+        jButton9.setText("browse...");
+        jButton9.setToolTipText("Find warzone's config folder");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         jTextField4.setText(obj.wzconfigpath);
         jTextField4.setEditable(false);
@@ -472,9 +483,6 @@ public class NJFrm extends javax.swing.JFrame {
 
         jTextField6.setText(obj.pathMods);
         jTextField6.setEditable(false);
-
-        jButton10.setText("browse...");
-        jButton10.setEnabled(false);
 
         jCheckBox2.setText("Resolution");
 
@@ -559,26 +567,26 @@ public class NJFrm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton9))
+                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton8)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                                .addComponent(jTextField3)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton9, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton8, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(280, Short.MAX_VALUE))
+                        .addContainerGap(274, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -595,21 +603,20 @@ public class NJFrm extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jButton13))))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton10))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jCheckBox1)
                                 .addGap(18, 18, 18)
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton14)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
+                                .addComponent(jButton14))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTextField6))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -640,8 +647,7 @@ public class NJFrm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel7))
                 .addGap(10, 10, 10)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -657,7 +663,7 @@ public class NJFrm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCheckBox3))
                     .addComponent(jButton13))
-                .addContainerGap(227, Short.MAX_VALUE))
+                .addContainerGap(228, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Options", jPanel2);
@@ -829,7 +835,7 @@ public class NJFrm extends javax.swing.JFrame {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wzL/wz_faceboook_logo.png"))); // NOI18N
 
         jLabel12.setFont(new java.awt.Font("Droid Sans", 0, 12)); // NOI18N
-        jLabel12.setText("<html> This launcher made by Kaynix for warzone2100 players to make online play more comfortable.<br>\nIf you have any suggestions/improvments or found bug contact me kaynix29@gmail.com or at forum pm to <b>Terminator</b>\n<br>\nWarzone2100 Launcher version alpha 0.15:<br>\n- added profiles<br>\n- added delete mod button<br>\n- added delete map button<br>\n- preparing ladder background<br>\n- improved mods management<br>\n- improved maps management<br>\n- enabled launching game from campaign Alpha,Beta,Gamma<br>\n- enabled fullscreen/resolution changer(direct writing to config file)<br>\n- bug fixes<br>\n<br>\n<p>run launcher in terminal to see logs.</p>\n<br>\n\n<p>For more info visit wz2100.net or warzone2100.org.ua </p>\n<br>\n<p>source code: github.com/kaynix/wzL </p>\n</html>"); // NOI18N
+        jLabel12.setText("<html> This launcher made by Kaynix for warzone2100 players to make online play more comfortable.<br>\nIf you have any suggestions/improvments or found bug contact me kaynix29@gmail.com or at forum pm to <b>Terminator</b>\n<br>\nWarzone2100 Launcher version alpha 0.15a*:<br>\n- added profiles<br>\n- added delete mod button<br>\n- added delete map button<br>\n- preparing ladder background<br>\n- improved mods management<br>\n- improved maps management<br>\n- enabled launching game from campaign Alpha,Beta,Gamma<br>\n- enabled fullscreen/resolution changer(direct writing to config file)<br>\n- bug fixes<br>\n*- add browse buttons for game exe and config folder<br>\n*- fixed issue with game exe and config folder<br>\n*- make use java preferences(location platform dependent)<br>\n<br>\n<p>run launcher in terminal to see logs.</p>\n<br>\n\n<p>For more info visit wz2100.net or warzone2100.org.ua </p>\n<br>\n<p>source code: <a href='github.com/kaynix/wzL'>github.com/kaynix/wzL</a></p>\n</html>"); // NOI18N
         jLabel12.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -850,7 +856,7 @@ public class NJFrm extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("About", jPanel5);
@@ -903,9 +909,9 @@ public class NJFrm extends javax.swing.JFrame {
             // TODO add your handling code here:
             System.out.print("warzone2100.exe --join=" + jTable1.getValueAt(jTable1.getSelectedRow(), 4));
             if (System.getProperty("os.name").contains("Windows")) {
-                p = Runtime.getRuntime().exec("warzone2100.exe --join=" + jTable1.getValueAt(jTable1.getSelectedRow(), 4));
+                p = Runtime.getRuntime().exec(WzFiles.wzapath + " --join=" + jTable1.getValueAt(jTable1.getSelectedRow(), 4));
             } else {
-            p = Runtime.getRuntime().exec("./warzone2100 --join=" + jTable1.getValueAt(jTable1.getSelectedRow(), 4));
+            p = Runtime.getRuntime().exec(WzFiles.wzapath + " --join=" + jTable1.getValueAt(jTable1.getSelectedRow(), 4));
             }
           //  Process p2 = Runtime.getRuntime().exec("warzone2100 --join=" + jTable1.getValueAt(jTable1.getSelectedRow(), 4));
         } catch (IOException ex) {
@@ -920,9 +926,9 @@ public class NJFrm extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             if (System.getProperty("os.name").contains("Windows")) {
-                p = Runtime.getRuntime().exec("warzone2100.exe --host");
+                p = Runtime.getRuntime().exec(WzFiles.wzapath + " --host");
             } else {
-            p = Runtime.getRuntime().exec("./warzone2100 --host");
+            p = Runtime.getRuntime().exec(WzFiles.wzapath + " --host");
             }
 
         } catch (IOException ex) {
@@ -1218,9 +1224,41 @@ public class NJFrm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton14ActionPerformed
 
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        /*
+        * Setting warzone2100 exe by user
+        */
+        JFileChooser fc = new JFileChooser();
+        Preferences prefs = Preferences.userRoot().node("wzL");
+        fc.setDialogTitle("Find Warzone's executable file");
+        fc.setMultiSelectionEnabled(false);
+        fc.setFileHidingEnabled(true);
+        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fc.showOpenDialog(fc);
+        System.out.println(fc.getSelectedFile().getPath());
+        WzFiles.wzapath = fc.getSelectedFile().getPath();
+        prefs.put("wzapath", WzFiles.wzapath);
+        jTextField3.setText(WzFiles.wzapath);
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+                JFileChooser fc = new JFileChooser();
+        Preferences prefs = Preferences.userRoot().node("wzL");
+        fc.setDialogTitle("Set Warzone's Config Folder");
+        fc.setMultiSelectionEnabled(false);
+        fc.setFileHidingEnabled(false);
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        fc.showOpenDialog(fc);
+        System.out.println(fc.getSelectedFile().getPath());
+        WzFiles.wzconfigpath = fc.getSelectedFile().getPath() + "/";
+        prefs.put("wzconfigpath", WzFiles.wzconfigpath);
+        jTextField4.setText(WzFiles.wzconfigpath);
+    }//GEN-LAST:event_jButton9ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;

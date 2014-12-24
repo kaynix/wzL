@@ -15,9 +15,9 @@ import java.util.Properties;
  * @author kaynix
  */
 public class WzFiles {
-    String wzapath;
+    static String wzapath;
     String wzdatadir;
-    String wzconfigpath;
+    static String wzconfigpath;
     String userHome;
     String pathMods;
     String pathMaps;
@@ -32,17 +32,24 @@ public class WzFiles {
         wzdatadir = System.getProperty("user.dir");
         if (System.getProperty("os.name").contains("Windows")) { //windows folders
 
-            wzconfigpath = userHome + ("/Documents/Warzone 2100 3.1/");
+            /*wzconfigpath = userHome + ("/Documents/Warzone 2100 3.1/");
             pathMaps = userHome + ("/Documents/Warzone 2100 3.1/maps/");
             pathMods = userHome + ("/Documents/Warzone 2100 3.1/mods/");
             pathAutoLoad = userHome + ("/Documents/Warzone 2100 3.1/mods/autoload/");
-            wzapath = (System.getProperty("user.dir")) + "warzone2100.exe";
+            wzapath = wzdatadir + "/warzone2100.exe";*/
+            pathMods = wzconfigpath +"mods/"; 
+            pathMaps = wzconfigpath + "maps/";
+            pathAutoLoad = wzconfigpath + "mods/autoload/";
         } else { //linux folders
-            wzconfigpath = userHome + ("/.warzone2100-3.1/");
+          /*  wzconfigpath = userHome + ("/.warzone2100-3.1/");
             pathMaps = userHome + ("/.warzone2100-3.1/maps/");
             pathMods = userHome + ("/.warzone2100-3.1/mods/");
             pathAutoLoad = userHome + ("/.warzone2100-3.1/mods/autoload/");
-            wzapath = wzdatadir + "/warzone2100";
+            wzapath = wzdatadir + "/warzone2100";*/
+            pathMods = wzconfigpath +"mods/"; 
+            pathMaps = wzconfigpath + "maps/";
+            pathAutoLoad = wzconfigpath + "mods/autoload/";
+          //  wzapath = wzdatadir + "/warzone2100";
 
         }
     }
@@ -50,11 +57,11 @@ public class WzFiles {
     /**
      * this constructor for users that have custom wz config/game directories in
      * this case we don't care about in witch OS we are in. Its receives
-     * location of wz config file and main game executable file.Its enough to
-     * identify other necessary game directories
+ location of wz config dir and main game executable dir.Its enough to
+ identify other necessary game directories
      *
-     * @param wzconfigpath wz config file location
-     * @param wzapath game main executable file location
+     * @param wzconfigpath wz config dir location
+     * @param wzapath game main executable dir location
      */
     
     public WzFiles(String wzconfigpath, String wzapath){
@@ -69,31 +76,39 @@ public class WzFiles {
     
     /**
      * Its looks for multiplayer profile files that are usually located at
-     * wzconfigpath+"multiplay/players/" returns String array of file names
+ wzconfigpath+"multiplay/players/" returns String array of dir names
      *
      * @return
      */
     public String[] profilelist(){
         String foldpath = wzconfigpath+"multiplay/players/";
-        File file = new File(foldpath);  
+        File dir = new File(foldpath);  
         FilenameFilter onlyWz = new OnlyExt("sta");
-        File[] files = file.listFiles(onlyWz);
-        String[] list= new String[files.length];
+        String[] list = null;
+        try {
+        File[] files = dir.listFiles(onlyWz);
+        list= new String[files.length];
         for (int fileInList = 0; fileInList < files.length; fileInList++)
-             list[fileInList] = files[fileInList].getName();  
+             list[fileInList] = files[fileInList].getName();
+        } catch (Exception e) {
+            System.out.println("Error === this are no MPprofiles files in wz flder");
+        }
         return list;
     } 
     
     /**
-     * Returns String array of map file names. !!With hash endings, use
+     * Returns String array of map dir names. !!With hash endings, use
      * removeHashFileEnds to remove for better looking names to fit in jList
      *
-     * @return String array of map file names
+     * @return String array of map dir names
      */
     public String[] maplist(){
         String foldpath = pathMaps;
     //   System.out.println("User Home Path: " + System.getenv("UserProfile"));
         File file = new File(foldpath);   //%USERPROFILE%
+        if (!file.exists()) {
+            return null;
+        }
         FilenameFilter onlyWz = new OnlyExt("wz");
         File[] files = file.listFiles(onlyWz);
         String[] list= new String[files.length];
@@ -122,23 +137,23 @@ public class WzFiles {
     }
     
     /**
-     * Returns String array of mod file names
+     * Returns String array of mod dir names
      *
      * @param autoload set true if you want to include /autoload Wz folder to be
      * scanned for available mods, if not only files in /Mods folder will be
      * added
-     * @return String array of mod list file names
+     * @return String array of mod list dir names
      */
     public String[] modlist(boolean autoload){
-       String foldpath =pathMods;
+       String foldpath = pathMods;
         mkRmALinModsfold(foldpath);
      //  System.out.println("User Home Path: " + System.getenv("UserProfile"));
-      //  File file = new File(foldpath);   //%USERPROFILE%
+      //  File dir = new File(foldpath);   //%USERPROFILE%
         FilenameFilter onlyWz = new OnlyExt("wz");
         if(autoload) foldpath=pathAutoLoad;
         File[] filesInMods = new File(foldpath).listFiles(onlyWz);
            
-        File[] filesInAutoload = new File(foldpath).listFiles(onlyWz);
+   //     File[] filesInAutoload = new File(foldpath).listFiles(onlyWz);
         String[] list= new String[filesInMods.length]; // +filesInAutoload.length if uncomment last *for* loop
         
         for (int i = 0; i < filesInMods.length; i++)   
@@ -156,7 +171,7 @@ public class WzFiles {
 
   // if the directory does not exist, create it
         if(!theMods.exists()){
-            System.out.println("Don't see Mods folder");
+            System.out.println("Can't see Mods folder");
             try {
                 theMods.mkdir();
             } catch (SecurityException se) {

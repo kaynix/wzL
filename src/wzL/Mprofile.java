@@ -114,7 +114,7 @@ public class Mprofile {
     }
     Mprofile(String playerFile) throws IOException{
         WzFiles obj = new WzFiles(); playerName = playerFile;
-        File file = new File(obj.wzconfigpath + "multiplay/players/" + playerName);
+        File file = new File(WzFiles.wzconfigpath + "multiplay/players/" + playerName);
         String str = null;
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
