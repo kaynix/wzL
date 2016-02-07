@@ -162,7 +162,7 @@ public class NJFrm extends javax.swing.JFrame {
         this.NICK = "wzPLayer";
         
         initComponents();
-      //  connectToServer();
+        connectToServer();
         jTextField2.setText(this.NICK);
         Timer t = new Timer(60000, new ActionListener() { //timer for gamelist refresh 60 sec
 

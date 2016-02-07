@@ -31,7 +31,7 @@ public class WzL {
             java.util.logging.Logger.getLogger(NJFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         /*********Locate config folder and wz executable file******************/
-        Preferences prefs = Preferences.userRoot();
+        Preferences prefs = Preferences.userNodeForPackage(WzL.class);
         if (!prefs.nodeExists("wzL")) {
             JFileChooser fc = new JFileChooser();
             fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
