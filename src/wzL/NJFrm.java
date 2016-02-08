@@ -161,7 +161,7 @@ public class NJFrm extends javax.swing.JFrame {
         this.NICK = "wzPLayer";
         
         initComponents();
-      //  connectToServer();
+        connectToServer();
         jTextField2.setText(this.NICK);
         Timer t = new Timer(60000, new ActionListener() { //timer for gamelist refresh 60 sec
 
@@ -278,7 +278,7 @@ public class NJFrm extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Warzone Launcher alpha 0.15a");
+        setTitle("Warzone Launcher alpha 0.15c");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setFont(new java.awt.Font("DejaVu Sans", 0, 12)); // NOI18N
         setMinimumSize(new java.awt.Dimension(640, 580));
@@ -833,7 +833,7 @@ public class NJFrm extends javax.swing.JFrame {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wzL/wz_faceboook_logo.png"))); // NOI18N
 
         jLabel12.setFont(new java.awt.Font("Droid Sans", 0, 12)); // NOI18N
-        jLabel12.setText("<html> This launcher made by Kaynix for warzone2100 players to make online play more comfortable.<br>\nIf you have any suggestions/improvments or found bug contact me kaynix29@gmail.com or at forum pm to <b>Terminator</b>\n<br>\nWarzone2100 Launcher version alpha 0.15a*:<br>\n- added profiles<br>\n- added delete mod button<br>\n- added delete map button<br>\n- preparing ladder background<br>\n- improved mods management<br>\n- improved maps management<br>\n- enabled launching game from campaign Alpha,Beta,Gamma<br>\n- enabled fullscreen/resolution changer(direct writing to config file)<br>\n- bug fixes<br>\n*- add browse buttons for game exe and config folder<br>\n*- fixed issue with game exe and config folder<br>\n*- make use java preferences(location platform dependent)<br>\n<br>\n<p>run launcher in terminal to see logs.</p>\n<br>\n\n<p>For more info visit wz2100.net or warzone2100.org.ua </p>\n<br>\n<p>source code: <a href='github.com/kaynix/wzL'>github.com/kaynix/wzL</a></p>\n</html>"); // NOI18N
+        jLabel12.setText("<html> This launcher made by Kaynix for warzone2100 players to make online play more comfortable.<br> If you have any suggestions/improvments or found bug contact me kaynix29@gmail.com or at forum pm to <b>Terminator</b> <br> Warzone2100 Launcher version alpha 0.15c**:<br> - added profiles<br> - added delete mod button<br> - added delete map button<br> - preparing ladder background<br> - improved mods management<br> - improved maps management<br> - enabled launching game from campaign Alpha,Beta,Gamma<br> - enabled fullscreen/resolution changer(direct writing to config file)<br> - bug fixes<br>*- add browse buttons for game exe and config folder<br> *- fixed issue with game exe and config folder<br>*- make use java preferences(location platform dependent)<br>**- fixed Java security issues<br>**- fixed folder relocation errors, so mods\\maps should work again<br><br><p>run launcher in terminal to see logs.</p> <br>  <p>For more info visit wz2100.net or warzone2100.org.ua </p> <br> <p>source code: <a href='github.com/kaynix/wzL'>github.com/kaynix/wzL</a></p> </html>"); // NOI18N
         jLabel12.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -854,7 +854,7 @@ public class NJFrm extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(159, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("About", jPanel5);
