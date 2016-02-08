@@ -50,7 +50,6 @@ public class NJFrm extends javax.swing.JFrame {
     private final String CHANNEL = "#warzone2100-games";
     private String line;
     private static DefaultListModel listModel;
-    private String modDirPath;
     
     static String timestmp(){
         String res;
@@ -162,7 +161,7 @@ public class NJFrm extends javax.swing.JFrame {
         this.NICK = "wzPLayer";
         
         initComponents();
-        connectToServer();
+      //  connectToServer();
         jTextField2.setText(this.NICK);
         Timer t = new Timer(60000, new ActionListener() { //timer for gamelist refresh 60 sec
 
@@ -608,15 +607,14 @@ public class NJFrm extends javax.swing.JFrame {
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
                                 .addComponent(jButton14))
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextField6))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField6))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -907,13 +905,9 @@ public class NJFrm extends javax.swing.JFrame {
             Process p;
         try {
             // TODO add your handling code here:
-            System.out.print("warzone2100.exe --join=" + jTable1.getValueAt(jTable1.getSelectedRow(), 4));
-            if (System.getProperty("os.name").contains("Windows")) {
-                p = Runtime.getRuntime().exec(WzFiles.wzapath + " --join=" + jTable1.getValueAt(jTable1.getSelectedRow(), 4));
-            } else {
+            System.out.println(WzFiles.wzapath + " --join=" + jTable1.getValueAt(jTable1.getSelectedRow(), 4));
             p = Runtime.getRuntime().exec(WzFiles.wzapath + " --join=" + jTable1.getValueAt(jTable1.getSelectedRow(), 4));
-            }
-          //  Process p2 = Runtime.getRuntime().exec("warzone2100 --join=" + jTable1.getValueAt(jTable1.getSelectedRow(), 4));
+
         } catch (IOException ex) {
             Logger.getLogger(NJFrm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -924,12 +918,7 @@ public class NJFrm extends javax.swing.JFrame {
         // TODO add your handling code here:
         Process p;
         try {
-            // TODO add your handling code here:
-            if (System.getProperty("os.name").contains("Windows")) {
                 p = Runtime.getRuntime().exec(WzFiles.wzapath + " --host");
-            } else {
-            p = Runtime.getRuntime().exec(WzFiles.wzapath + " --host");
-            }
 
         } catch (IOException ex) {
             Logger.getLogger(NJFrm.class.getName()).log(Level.SEVERE, null, ex);
@@ -981,18 +970,18 @@ public class NJFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // Deactivation MODS here
+        /*=========MOD DE-ACTIVATION========== */
         String modname;
       
-        if (System.getProperty("os.name").contains("Windows")) {
+      /*  if (System.getProperty("os.name").contains("Windows")) {
             modDirPath = ((System.getProperty("user.home")) + ("/Documents/Warzone 2100 3.1/mods/"));
         } else {
             modDirPath = ((System.getProperty("user.home")) + ("/.warzone2100-3.1/mods/")); //linux folderpath
-        }
-        modname = (String)jList3.getSelectedValue(); System.out.println(modDirPath+"autoload/"+modname);
+        }*/
+        modname = (String)jList3.getSelectedValue(); System.out.println(WzFiles.pathMods+"autoload/"+modname);
         try{
-        File mfile = new File(modDirPath+"autoload/"+modname);
-        mfile.renameTo(new File(modDirPath+modname));} catch (Exception io){
+        File mfile = new File(WzFiles.pathMods+"autoload/"+modname);
+        mfile.renameTo(new File(WzFiles.pathMods+modname));} catch (Exception io){
             System.out.println("Error moving file ::Deactivation error:: \r\n");
         }
       
@@ -1008,16 +997,16 @@ public class NJFrm extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
        String modname;
-      
-        if (System.getProperty("os.name").contains("Windows")) {
+      /*=========MOD ACTIVATION========== */
+       /* if (System.getProperty("os.name").contains("Windows")) {
             modDirPath = (System.getProperty("user.home")) + ("/Documents/Warzone 2100 3.1/mods/");
         } else {
             modDirPath = (System.getProperty("user.home")) + ("/.warzone2100-3.1/mods/"); //linux folderpath
-        }
-        modname = (String)jList4.getSelectedValue(); System.out.println(modDirPath+modname); 
+        }*/
+        modname = (String)jList4.getSelectedValue(); System.out.println(WzFiles.pathMods+modname); 
         try{
-        File mfile = new File(modDirPath+modname);
-        mfile.renameTo(new File(modDirPath+"autoload/"+modname));} catch (Exception io){
+        File mfile = new File(WzFiles.pathMods+modname);
+        mfile.renameTo(new File(WzFiles.pathMods+"autoload/"+modname));} catch (Exception io){
             System.out.println("Error moving file ::Activation error:: \r\n");
         }
         // refreshing GUI lists
@@ -1047,18 +1036,15 @@ public class NJFrm extends javax.swing.JFrame {
         if (evt.getSource() == jButton7) {
         int returnVal = fc.showOpenDialog(NJFrm.this);
         
-
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fc.getSelectedFile();
             DefaultListModel ls = (DefaultListModel) jList2.getModel();
             ls.addElement(file.getName());
-            WzFiles wzf = new WzFiles();
             System.out.println("Opening: " + file.getName() + ".");
-            String mapsDirPath = wzf.pathMaps;
             
                 try {
 
-                    file.renameTo(new File(mapsDirPath + file.getName()));
+                    file.renameTo(new File(WzFiles.pathMaps + file.getName()));
                 } catch (Exception io) {
                     System.out.println("Error moving Map file ::Adding error:: \r\n");
                 }
@@ -1083,13 +1069,11 @@ public class NJFrm extends javax.swing.JFrame {
             File file = fc.getSelectedFile();
             DefaultListModel ls = (DefaultListModel) jList4.getModel();
             ls.addElement(file.getName());
-            WzFiles wzf = new WzFiles();
             System.out.println("Opening: " + file.getName() + ".");
-            String modsDirPath = wzf.pathMods;
             
                 try {
 
-                    file.renameTo(new File(modsDirPath + file.getName()));
+                    file.renameTo(new File(WzFiles.pathMods + file.getName()));
                 } catch (Exception io) {
                     System.out.println("Error moving MOD file :: Adding error ::");
                 }
@@ -1103,14 +1087,14 @@ public class NJFrm extends javax.swing.JFrame {
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
         String mapname;
-         WzFiles ff = new WzFiles();
       
-        mapname = (String)jList4.getSelectedValue(); //System.out.println(ff.pathMaps+mapname);
+        mapname = (String)jList4.getSelectedValue(); //System.out.println(WzFiles.pathMaps+mapname);
         
         try{
-        File mfile = new File(ff.pathMods+mapname); 
+        File mfile = new File(WzFiles.pathMods+mapname); 
         System.out.println(mfile.getName());
-        if(mfile.exists()) mfile.delete();
+        if(mfile.exists()) //mfile.delete();
+            mfile.renameTo(new File(WzFiles.pathMods+".removed/"+mapname));
        // mfile.renameTo(new File(modDirPath+"autoload/"+mapname));
         } catch (Exception io){
             System.out.println("Error deleting mod file ::Activation error:: \r\n");
@@ -1162,7 +1146,7 @@ public class NJFrm extends javax.swing.JFrame {
         mapname = (String)jList2.getSelectedValue(); //System.out.println(ff.pathMaps+mapname);
         
         try{
-        File mfile = new File(ff.pathMaps+ff.addHashFileEnd(mapname)); 
+        File mfile = new File(WzFiles.pathMaps+ff.addHashFileEnd(mapname)); 
         System.out.println(mfile.getName());
         if(mfile.exists()) mfile.delete();
        // mfile.renameTo(new File(modDirPath+"autoload/"+mapname));
@@ -1204,20 +1188,16 @@ public class NJFrm extends javax.swing.JFrame {
         // TODO add your handling code here:
         Process p; String startfrom = null;  //--game=FASTPLAY --game=TUTORIAL3 --game=CAM_3A --game=CAM_1A --game=CAM_2A
         switch((String)jComboBox1.getSelectedItem()){  
-            case "Alpha": startfrom="--game=CAM_1A"; break;
-                case "Beta": startfrom="--game=CAM_2A"; break;
-                    case "Gamma": startfrom="--game=CAM_3A"; break;
-                        case "Tutorial": startfrom="--game=TUTORIAL3"; break;
-                            case "Fastplay": startfrom="--game=FASTPLAY"; break;
+            case "Alpha": startfrom=" --game=CAM_1A"; break;
+                case "Beta": startfrom=" --game=CAM_2A"; break;
+                    case "Gamma": startfrom=" --game=CAM_3A"; break;
+                        case "Tutorial": startfrom=" --game=TUTORIAL3"; break;
+                            case "Fastplay": startfrom=" --game=FASTPLAY"; break;
             
         }
         try {
             // TODO add your handling code here:
-            if (System.getProperty("os.name").contains("Windows")) {
-                p = Runtime.getRuntime().exec("warzone2100.exe "+startfrom);
-            } else {
-            p = Runtime.getRuntime().exec("./warzone2100 "+startfrom);
-            }
+           p = Runtime.getRuntime().exec(WzFiles.wzapath+startfrom);
 
         } catch (IOException ex) {
             Logger.getLogger(NJFrm.class.getName()).log(Level.SEVERE, null, ex);
@@ -1230,13 +1210,13 @@ public class NJFrm extends javax.swing.JFrame {
         * Setting warzone2100 exe by user
         */
         JFileChooser fc = new JFileChooser();
-        Preferences prefs = Preferences.userRoot().node("wzL");
+        Preferences prefs = Preferences.userNodeForPackage(WzL.class);
         fc.setDialogTitle("Find Warzone's executable file");
         fc.setMultiSelectionEnabled(false);
         fc.setFileHidingEnabled(true);
         fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fc.showOpenDialog(fc);
-        System.out.println(fc.getSelectedFile().getPath());
+        System.out.println("New wz location is: " +fc.getSelectedFile().getPath());
         WzFiles.wzapath = fc.getSelectedFile().getPath();
         prefs.put("wzapath", WzFiles.wzapath);
         jTextField3.setText(WzFiles.wzapath);
@@ -1245,13 +1225,13 @@ public class NJFrm extends javax.swing.JFrame {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
                 JFileChooser fc = new JFileChooser();
-        Preferences prefs = Preferences.userRoot().node("wzL");
+        Preferences prefs = Preferences.userNodeForPackage(WzL.class);
         fc.setDialogTitle("Set Warzone's Config Folder");
         fc.setMultiSelectionEnabled(false);
         fc.setFileHidingEnabled(false);
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         fc.showOpenDialog(fc);
-        System.out.println(fc.getSelectedFile().getPath());
+        System.out.println("New config location is: "+fc.getSelectedFile().getPath());
         WzFiles.wzconfigpath = fc.getSelectedFile().getPath() + "/";
         prefs.put("wzconfigpath", WzFiles.wzconfigpath);
         jTextField4.setText(WzFiles.wzconfigpath);

@@ -32,14 +32,16 @@ public class WzL {
         }
         /*********Locate config folder and wz executable file******************/
         Preferences prefs = Preferences.userNodeForPackage(WzL.class);
-        if (!prefs.nodeExists("wzL")) {
+        
+        if (prefs.keys().length == 0) {
             JFileChooser fc = new JFileChooser();
             fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
             fc.setFileHidingEnabled(false);
             fc.setMultiSelectionEnabled(false);
             fc.setDialogTitle("Set Warzone's Config Folder");
             fc.showOpenDialog(fc);
-            System.out.println(fc.getSelectedFile().getPath());
+            
+            System.out.println("Config folder is : " +fc.getSelectedFile().getPath());
             WzFiles.wzconfigpath = fc.getSelectedFile().getPath() + "/";
 
             prefs.put("wzconfigpath", WzFiles.wzconfigpath);
@@ -47,13 +49,15 @@ public class WzL {
             fc.setFileHidingEnabled(true);
             fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
             fc.showOpenDialog(fc);
-            System.out.println(fc.getSelectedFile().getPath());
+            System.out.println("Game exe is: " + fc.getSelectedFile().getPath());
             WzFiles.wzapath = fc.getSelectedFile().getPath();
             prefs.put("wzapath", WzFiles.wzapath);
-        }
-        prefs = Preferences.userRoot().node("wzL");
+            prefs.flush();
+           // prefs.sync();
+        } else {
         WzFiles.wzconfigpath = prefs.get("wzconfigpath", null);
         WzFiles.wzapath = prefs.get("wzapath", null);
+        }
         /**********And Set Preferences******************************************/
         
         

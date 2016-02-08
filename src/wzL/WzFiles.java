@@ -16,12 +16,12 @@ import java.util.Properties;
  */
 public class WzFiles {
     static String wzapath;
-    String wzdatadir;
+    static String wzdatadir;
     static String wzconfigpath;
-    String userHome;
-    String pathMods;
-    String pathMaps;
-    String pathAutoLoad;
+    static String userHome;
+    static String pathMods;
+    static String pathMaps;
+    static String pathAutoLoad;
 
     /**
      * Default constructor with default configure folders Warzone settings its
@@ -67,11 +67,11 @@ public class WzFiles {
     public WzFiles(String wzconfigpath, String wzapath){
         userHome = System.getProperty("user.home");
         wzdatadir = System.getProperty("user.dir");
-        this.wzconfigpath = wzconfigpath;
-        this.wzapath = wzapath;
-        this.pathMods = wzconfigpath + "/mods/";
-        this.pathMaps = wzconfigpath + "/maps/";
-        this.pathAutoLoad = pathMods + "autoload/";
+        WzFiles.wzconfigpath = wzconfigpath;
+        WzFiles.wzapath = wzapath;
+        WzFiles.pathMods = wzconfigpath + "/mods/";
+        WzFiles.pathMaps = wzconfigpath + "/maps/";
+        WzFiles.pathAutoLoad = pathMods + "autoload/";
     }
     
     /**

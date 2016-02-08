@@ -534,6 +534,7 @@
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTextField6.setText(obj.pathMods);"/>
+                <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="NJFrm_jTextField6"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JCheckBox" name="jCheckBox2">
@@ -565,6 +566,7 @@
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="JFormattedTextField tf = ((JSpinner.DefaultEditor) jSpinner1.getEditor()).getTextField();&#xa;    tf.setEditable(false);"/>
+                <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="NJFrm_jSpinner1"/>
               </AuxValues>
             </Component>
             <Container class="javax.swing.JPanel" name="jPanel6">
