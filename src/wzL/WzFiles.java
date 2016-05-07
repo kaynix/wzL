@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -84,16 +86,21 @@ public class WzFiles {
         String foldpath = wzconfigpath+"multiplay/players/";
         File dir = new File(foldpath);  
         FilenameFilter onlyWz = new OnlyExt("sta");
-        String[] list = null;
-        try {
         File[] files = dir.listFiles(onlyWz);
-        list= new String[files.length];
-        for (int fileInList = 0; fileInList < files.length; fileInList++)
-             list[fileInList] = files[fileInList].getName();
+        List<String> ls = new ArrayList<String>();
+        String[] rezult = new String[files.length];
+        try {
+            for (File file : files) {
+                // rezult[fileInList] = files[fileInList].getName();
+                ls.add(file.getName());
+            }
         } catch (Exception e) {
             System.out.println("Error === this are no MPprofiles files in wz flder");
         }
-        return list;
+        rezult = ls.toArray(new String[0]);
+        // f*cking spinner requires non null or non empty list
+        if(rezult.length==0 || rezult==null) return new String[]{"empty"};
+        return rezult;
     } 
     
     /**

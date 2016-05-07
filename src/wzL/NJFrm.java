@@ -19,6 +19,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -161,7 +162,7 @@ public class NJFrm extends javax.swing.JFrame {
         this.NICK = "wzPLayer";
         
         initComponents();
-        connectToServer();
+     //   connectToServer();
         jTextField2.setText(this.NICK);
         Timer t = new Timer(60000, new ActionListener() { //timer for gamelist refresh 60 sec
 
@@ -490,8 +491,7 @@ public class NJFrm extends javax.swing.JFrame {
         jTextField8.setText("900");
 
         jSpinner1.setFont(new java.awt.Font("DejaVu Sans", 0, 10)); // NOI18N
-        jSpinner1.setModel(new SpinnerListModel(obj.profilelist())
-        );
+        jSpinner1.setModel(new SpinnerListModel(obj.profilelist()));
         JFormattedTextField tf = ((JSpinner.DefaultEditor) jSpinner1.getEditor()).getTextField();
         tf.setEditable(false);
         jSpinner1.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -833,7 +833,7 @@ public class NJFrm extends javax.swing.JFrame {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wzL/wz_faceboook_logo.png"))); // NOI18N
 
         jLabel12.setFont(new java.awt.Font("Droid Sans", 0, 12)); // NOI18N
-        jLabel12.setText("<html> This launcher made by Kaynix for warzone2100 players to make online play more comfortable.<br> If you have any suggestions/improvments or found bug contact me kaynix29@gmail.com or at forum pm to <b>Terminator</b> <br> Warzone2100 Launcher version alpha 0.15c**:<br> - added profiles<br> - added delete mod button<br> - added delete map button<br> - preparing ladder background<br> - improved mods management<br> - improved maps management<br> - enabled launching game from campaign Alpha,Beta,Gamma<br> - enabled fullscreen/resolution changer(direct writing to config file)<br> - bug fixes<br>*- add browse buttons for game exe and config folder<br> *- fixed issue with game exe and config folder<br>*- make use java preferences(location platform dependent)<br>**- fixed Java security issues<br>**- fixed folder relocation errors, so mods\\maps should work again<br><br><p>run launcher in terminal to see logs.</p> <br>  <p>For more info visit wz2100.net or warzone2100.org.ua </p> <br> <p>source code: <a href='github.com/kaynix/wzL'>github.com/kaynix/wzL</a></p> </html>"); // NOI18N
+        jLabel12.setText("<html> This launcher made by Kaynix for warzone2100 players to make online play more comfortable.<br> If you have any suggestions/improvments or found bug contact me kaynix29@gmail.com or at forum pm to <b>Terminator</b> <br> Warzone2100 Launcher version alpha 0.15d**:<br> - added profiles<br> - added delete mod button<br> - added delete map button<br> - preparing ladder background<br> - improved mods management<br> - improved maps management<br> - enabled launching game from campaign Alpha,Beta,Gamma<br> - enabled fullscreen/resolution changer(direct writing to config file)<br> - bug fixes<br>*- add browse buttons for game exe and config folder<br> *- fixed issue with game exe and config folder<br>*- make use java preferences(location platform dependent)<br>**- fixed Java security issues<br>**- fixed folder relocation errors, so mods\\maps should work again<br>**- fixed profiles empty folder bug<br><br><p>run launcher in terminal to see logs.</p> <br>  <p>For more info visit wz2100.net</p> <br> <p>source code: <a href='github.com/kaynix/wzL'>github.com/kaynix/wzL</a></p> </html>"); // NOI18N
         jLabel12.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -854,7 +854,7 @@ public class NJFrm extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("About", jPanel5);
