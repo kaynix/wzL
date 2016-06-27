@@ -81,7 +81,8 @@ public class NJFrm extends javax.swing.JFrame {
                     + " 8 * : Kaynix's IRC WZ2100 Launcher\r\n");
             writer.flush();
         } catch (Exception e) {
-            System.exit(0);
+            System.out.println("Can't connect to IRC server");
+            jTextArea1.setText("Can't connect to IRC server");
         }
     }
 
