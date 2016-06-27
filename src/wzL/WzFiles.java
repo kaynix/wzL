@@ -4,13 +4,24 @@
  */
 package wzL;
 
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipException;
+import java.util.zip.ZipFile;
+import java.util.zip.ZipInputStream;
 
 /**
  *
@@ -95,7 +106,8 @@ public class WzFiles {
                 ls.add(file.getName());
             }
         } catch (Exception e) {
-            System.out.println("Error === this are no MPprofiles files in wz flder");
+            System.out.println("Error === there are no MPprofiles files in wz folder");
+            return new String[]{"empty"};
         }
         rezult = ls.toArray(new String[0]);
         // f*cking spinner requires non null or non empty list
@@ -124,8 +136,54 @@ public class WzFiles {
              list[fileInList] = files[fileInList].getName();
             }
         return list;
-    } 
-       
+    }
+        
+    public static int[] getMapSizeAndHeights(String wzmapfilename)throws FileNotFoundException, IOException, ZipException {
+        
+        System.out.println(wzmapfilename);
+        ZipInputStream zip = new ZipInputStream(new BufferedInputStream(new FileInputStream(wzmapfilename)));
+        ZipEntry iterator_files;
+        byte[] buff = null; int[] rez = null;
+        InputStream in=null;
+                
+        while ((iterator_files = zip.getNextEntry())!=null) {
+          //  System.out.println(iterator_files.getName() + " "+ iterator_files.getMethod()+" "+ "size: "+iterator_files.getSize());
+            ZipFile zp = new ZipFile(wzmapfilename);
+            
+            if(iterator_files.getName().endsWith("game.map")){
+                System.out.println("size: "+iterator_files.getSize());
+                in = zp.getInputStream(iterator_files);
+                buff = new byte[2048];
+                System.out.println("buff: "+buff.length);
+              DataInputStream ds = new DataInputStream(in);
+               byte[] intData = new byte[4];
+                    ds.readFully(intData);
+                  //  System.out.println("" + (char) intData[0] + (char) intData[1] + (char) intData[2] + (char) intData[3]);
+                    int[] verwidthaight = new int[3];
+                    for (int i = 0; i < 3; i++) {  //version, width, height
+                        ds.readFully(intData);
+                        verwidthaight[i] = ByteBuffer.wrap(intData).order(ByteOrder.LITTLE_ENDIAN).getInt();
+                    }
+                    System.out.println("width: " + verwidthaight[1] + " " + "height: " + verwidthaight[2]);
+                    rez = new int[verwidthaight[1] * verwidthaight[2] + 2];
+                    rez[rez.length - 2] = verwidthaight[1];
+                    rez[rez.length - 1] = verwidthaight[2];
+
+                    for (int i = 0; i < verwidthaight[1] * verwidthaight[2]; i++) {
+                        //reading texture info  ULE 16
+                        ds.skipBytes(2);
+                        // reading Height(Z depth) or the tile ULE 8
+                        //rez[i] =(int) ByteBuffer.wrap(intData).order(ByteOrder.LITTLE_ENDIAN).get()& 0xFF;
+                        rez[i] = ds.readUnsignedByte();
+
+                    }
+
+                ds.close();
+            }
+        }
+        return rez;
+    }
+    
     String [] removeHashFileEnds(String [] list){
         for(int i=0;i<list.length;i++){
             if(list[i].lastIndexOf('-')<=3)
