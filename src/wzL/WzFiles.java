@@ -99,8 +99,9 @@ public class WzFiles {
         FilenameFilter onlyWz = new OnlyExt("sta");
         File[] files = dir.listFiles(onlyWz);
         List<String> ls = new ArrayList<String>();
-        String[] rezult = new String[files.length];
+        String[] rezult;
         try {
+            rezult = new String[files.length];
             for (File file : files) {
                 // rezult[fileInList] = files[fileInList].getName();
                 ls.add(file.getName());
@@ -126,7 +127,7 @@ public class WzFiles {
     //   System.out.println("User Home Path: " + System.getenv("UserProfile"));
         File file = new File(foldpath);   //%USERPROFILE%
         if (!file.exists()) {
-            return null;
+            return new String[]{"no maps found"};
         }
         FilenameFilter onlyWz = new OnlyExt("wz");
         File[] files = file.listFiles(onlyWz);
@@ -184,13 +185,16 @@ public class WzFiles {
         return rez;
     }
     
-    String [] removeHashFileEnds(String [] list){
-        for(int i=0;i<list.length;i++){
-            if(list[i].lastIndexOf('-')<=3)
-                continue;
-            list[i]=list[i].substring(0, list[i].lastIndexOf('-'));
+    String[] removeHashFileEnds(String[] list) {
+        if (list != null || list.length != 0) {
+            for (int i = 0; i < list.length; i++) {
+                if (list[i].lastIndexOf('-') <= 3) {
+                    continue;
+                }
+                list[i] = list[i].substring(0, list[i].lastIndexOf('-'));
+            }
         }
-     return list;       
+        return list;
     }
     
     String addHashFileEnd(String mapname) {
