@@ -17,8 +17,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.net.Socket;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -138,11 +136,13 @@ public class NJFrm extends javax.swing.JFrame {
                     }
                     if (line.indexOf("332") >= 0) //  channel TOPIC
                         jTextArea1.append(NJFrm.timestmp()+"Done \r\n");
+                    Toolkit.getDefaultToolkit().beep();
                     
                     if (line.indexOf("JOIN #warzone2100-games") >= 0){ //  user has Join
                         if(line.substring(1, line.indexOf("!")).compareTo(NICK)!=0)
                         listModel.addElement(line.substring(1, line.indexOf("!")));
                         jTextArea1.append(NJFrm.timestmp()+line.substring(1, line.indexOf("!"))+" has Join\r\n");
+                        Toolkit.getDefaultToolkit().beep();
                     }
                     if (line.indexOf("QUIT :") >= 0){ //  quit user
                         
@@ -154,6 +154,7 @@ public class NJFrm extends javax.swing.JFrame {
                         jTextArea1.append(NJFrm.timestmp()+line.substring(1, line.indexOf("!")) +": " + line.substring(line.indexOf(CHANNEL) + 20)+ "\r\n");
                          //  jTextArea1.append(line + "\r\n");
                         jScrollPane2.getVerticalScrollBar().setValue(jScrollPane2.getVerticalScrollBar().getMaximum());
+                        Toolkit.getDefaultToolkit().beep();
                     }
                     jTextArea2.append(line + "\r\n");
                     jScrollPane7.getVerticalScrollBar().setValue(jScrollPane7.getVerticalScrollBar().getMaximum());
