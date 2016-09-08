@@ -93,7 +93,7 @@ public class WzFiles {
      *
      * @return
      */
-    public String[] profilelist(){
+    public static String[] profilelist(){
         String foldpath = wzconfigpath+"multiplay/players/";
         File dir = new File(foldpath);  
         FilenameFilter onlyWz = new OnlyExt("sta");

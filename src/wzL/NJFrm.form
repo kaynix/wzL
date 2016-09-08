@@ -403,34 +403,27 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jTextField4" min="-2" pref="284" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                                      <Component id="jTextField4" pref="284" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jTextField3" max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                                      <Component id="jTextField3" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="26" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jButton9" alignment="1" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButton8" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="122" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jSpinner1" min="-2" pref="120" max="-2" attributes="0"/>
-                                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="348" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -470,66 +463,88 @@
                                       <Component id="jTextField5" min="-2" pref="260" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="93" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="jComboBox2" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jSpinner1" min="-2" pref="120" max="-2" attributes="0"/>
+                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                      <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="222" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButton8" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                                  <Component id="jSpinner1" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jButton8" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jLabel13" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jTextField4" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButton9" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextField5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextField6" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jCheckBox1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButton14" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jCheckBox2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextField7" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextField8" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTextField5" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jCheckBox3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jTextField6" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jCheckBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jButton14" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jCheckBox2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jTextField7" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jTextField8" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jCheckBox3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jButton13" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
-                          <Component id="jButton13" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jSpinner1" min="-2" pref="20" max="-2" attributes="0"/>
+                                  <EmptySpace min="31" pref="31" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jPanel6" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace pref="311" max="32767" attributes="0"/>
                   </Group>
@@ -545,7 +560,7 @@
                 </Property>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="WzFiles obj = new WzFiles();&#xa;jTextField3.setText(obj.wzapath);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTextField3.setText(WzFiles.wzapath);"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
@@ -577,7 +592,7 @@
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTextField()"/>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTextField4.setText(obj.wzconfigpath);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTextField4.setText(WzFiles.wzconfigpath);"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
@@ -617,12 +632,12 @@
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTextField5.setText(obj.wzdatadir);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTextField5.setText(WzFiles.wzdatadir);"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
-                <Property name="text" type="java.lang.String" value="MP profile"/>
+                <Property name="text" type="java.lang.String" value="MultiPlayer warzone&apos;s profile"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
@@ -636,7 +651,7 @@
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTextField6.setText(obj.pathMods);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTextField6.setText(WzFiles.pathMods);"/>
                 <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="NJFrm_jTextField6"/>
               </AuxValues>
             </Component>
@@ -660,7 +675,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="DejaVu Sans" size="10" style="0"/>
                 </Property>
-                <Property name="model" preCode="jSpinner1.setModel(new SpinnerListModel(obj.profilelist()));"/>
+                <Property name="model" preCode="jSpinner1.setModel(new SpinnerListModel(WzFiles.profilelist()));"/>
               </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="MprofileChanged"/>
@@ -778,6 +793,23 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton14ActionPerformed"/>
               </Events>
             </Component>
+            <Component class="javax.swing.JComboBox" name="jComboBox2">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Find new game versions and config files and new profiles will be added automatically"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateGamePath"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_allCodePost" type="java.lang.String" value="setGameProfiles();"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel13">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Game version profiles"/>
+                <Property name="toolTipText" type="java.lang.String" value="IT DOESN&apos;T CHANGE WZ CONFIG FILE PATH!!"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPanel3">
@@ -793,7 +825,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jButton5" max="32767" attributes="0"/>
@@ -802,15 +834,15 @@
                           <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel1" min="-2" pref="77" max="-2" attributes="0"/>
                                   <Component id="jScrollPane6" pref="153" max="32767" attributes="0"/>
                                   <Component id="jScrollPane5" alignment="0" pref="0" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel2" min="-2" pref="88" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
@@ -820,11 +852,11 @@
                                               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                                               <Component id="jButton4" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="jScrollPane4" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
+                                          <Component id="jScrollPane4" alignment="0" pref="190" max="32767" attributes="0"/>
                                       </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                                       <Component id="jPanel9" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" max="-2" attributes="0"/>
                                       <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -835,7 +867,7 @@
                               <Component id="jButton12" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1147,7 +1179,7 @@
                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="107" max="32767" attributes="0"/>
+                      <EmptySpace pref="91" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1165,7 +1197,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Droid Sans" size="12" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="&lt;html&gt; This launcher made by Kaynix for warzone2100 players to make online play more comfortable.&lt;br&gt;&#xa;If you have any suggestions/improvments or found bug contact me kaynix29@gmail.com or at forum pm to &lt;b&gt;Terminator&lt;/b&gt; &lt;br&gt;&#xa; Warzone2100 Launcher version alpha 0.15e++:&lt;br&gt;&#xa; - added profiles&lt;br&gt;&#xa; - added delete mod button&lt;br&gt;&#xa; - added delete map button&lt;br&gt;&#xa; - preparing ladder background&lt;br&gt;&#xa; - improved mods management&lt;br&gt;&#xa; - improved maps management&lt;br&gt;&#xa; - enabled launching game from campaign Alpha,Beta,Gamma&lt;br&gt;&#xa; - enabled fullscreen/resolution changer(direct writing to config file)&lt;br&gt;&#xa; - bug fixes&lt;br&gt;*- add browse buttons for game exe and config folder&lt;br&gt;&#xa; *- fixed issue with game exe and config folder&lt;br&gt;&#xa; *- make use java preferences(location platform dependent)&lt;br&gt;&#xa; **- fixed Java security issues&lt;br&gt;&#xa; **- fixed folder relocation errors, so mods\u005cmaps should work again&lt;br&gt;&#xa; **- fixed profiles empty folder bug&lt;br&gt;&#xa; ++- added map preview in maps\u005cmod tab&lt;br&gt;&#xa; ++- try to foolproof if player selects wrong folders from 1st time&lt;br&gt;&#xa; ++- added server log chat&lt;br&gt;&#xa; ++- do not shutdown if no Internet connection&lt;br&gt;&#xa; &lt;br&gt;&lt;p&gt;run launcher in terminal to see logs.&lt;/p&gt; &lt;br&gt;&#xa; &lt;p&gt;For more info visit wz2100.net&lt;/p&gt; &lt;br&gt;&#xa; &lt;p&gt;source code: &lt;a href=&apos;github.com/kaynix/wzL&apos;&gt;github.com/kaynix/wzL&lt;/a&gt;&lt;/p&gt; &lt;/html&gt;" noResource="true" containsInvalidXMLChars="true"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt; This launcher made by Kaynix for warzone2100 players to make online play more comfortable.&lt;br&gt;&#xa;If you have any suggestions/improvments or found bug contact me kaynix29@gmail.com or at forum pm to &lt;b&gt;Terminator&lt;/b&gt; &lt;br&gt;&#xa; Warzone2100 Launcher version alpha 0.15e++:&lt;br&gt;&#xa; - added profiles&lt;br&gt;&#xa; - added delete mod button&lt;br&gt;&#xa; - added delete map button&lt;br&gt;&#xa; - preparing ladder background&lt;br&gt;&#xa; - improved mods management&lt;br&gt;&#xa; - improved maps management&lt;br&gt;&#xa; - enabled launching game from campaign Alpha,Beta,Gamma&lt;br&gt;&#xa; - enabled fullscreen/resolution changer(direct writing to config file)&lt;br&gt;&#xa; - bug fixes&lt;br&gt;*- add browse buttons for game exe and config folder&lt;br&gt;&#xa; *- fixed issue with game exe and config folder&lt;br&gt;&#xa; *- make use java preferences(location platform dependent)&lt;br&gt;&#xa; **- fixed Java security issues&lt;br&gt;&#xa; **- fixed folder relocation errors, so mods\u005cmaps should work again&lt;br&gt;&#xa; **- fixed profiles empty folder bug&lt;br&gt;&#xa; ++- added map preview in maps\u005cmod tab&lt;br&gt;&#xa; ++- try to foolproof if player selects wrong folders from 1st time&lt;br&gt;&#xa; ++- added server log chat&lt;br&gt;&#xa; ++- do not shutdown if no Internet connection&lt;br&gt;&#xa; ++- added sound beep to incoming chat massages&lt;br&gt;&#xa; &lt;br&gt;&lt;p&gt;run launcher in terminal to see logs.&lt;/p&gt; &lt;br&gt;&#xa; &lt;p&gt;For more info visit wz2100.net&lt;/p&gt; &lt;br&gt;&#xa; &lt;p&gt;source code: &lt;a href=&apos;github.com/kaynix/wzL&apos;&gt;github.com/kaynix/wzL&lt;/a&gt;&lt;/p&gt; &lt;/html&gt;" noResource="true" containsInvalidXMLChars="true"/>
                 <Property name="verticalAlignment" type="int" value="1"/>
               </Properties>
             </Component>

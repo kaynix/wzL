@@ -52,6 +52,7 @@ public class WzL {
             System.out.println("Game exe is: " + fc.getSelectedFile().getPath());
             WzFiles.wzapath = fc.getSelectedFile().getPath();
             prefs.put("wzapath", WzFiles.wzapath);
+            prefs.put("profile1", WzFiles.wzapath);
             prefs.flush();
            // prefs.sync();
         } else {
